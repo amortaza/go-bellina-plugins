@@ -6,33 +6,33 @@ import (
 	"fmt"
 )
 
-var lastNode *bl.Node
+var lastNodeID string
 
 type Event struct {
 	X, Y int32
 	Target *bl.Node
 }
 
-type ClickPlugin struct {
+type Plugin struct {
 }
 
-func (c *ClickPlugin) Name() string {
+func (c *Plugin) Name() string {
 	return "click"
 }
 
-func (c *ClickPlugin) Init() {
+func (c *Plugin) Init() {
 }
 
-func (c *ClickPlugin) Uninit() {
+func (c *Plugin) Uninit() {
 }
 
-func (c *ClickPlugin) On(cb func(interface{})) {
+func (c *Plugin) On(cb func(interface{})) {
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
 		if e.Action == xel.Down {
-			lastNode = e.Target
+			lastNodeID = e.Target.ID
 		} else if e.Action == xel.Up {
-			if lastNode.ID == e.Target.ID {
+			if lastNodeID == e.Target.ID {
 				// we have a click!
 				cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 			}
@@ -42,8 +42,9 @@ func (c *ClickPlugin) On(cb func(interface{})) {
 	})
 }
 
-func NewPlugin() *ClickPlugin {
-	c := &ClickPlugin{}
+
+func NewPlugin() *Plugin {
+	c := &Plugin{}
 
 	return c
 }

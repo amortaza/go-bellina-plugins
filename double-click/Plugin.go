@@ -1,0 +1,67 @@
+package double_click
+
+import (
+	"bellina"
+	"plugin/click"
+	"time"
+)
+
+var lastNodeID string
+var lastMs int64
+
+type Event struct {
+	X, Y int32
+	Target *bl.Node
+}
+
+type Plugin struct {
+	speedMs int64
+}
+
+func (c *Plugin) Name() string {
+	return "double-click"
+}
+
+func (c *Plugin) Init() {
+	bl.Plugin( click.NewPlugin() )
+}
+
+func (c *Plugin) Uninit() {
+}
+
+func (c *Plugin) On(cb func(interface{})) {
+
+	bl.On("click", func(i interface{}) {
+		e := i.(click.Event)
+
+		if lastNodeID == "" {
+			lastNodeID = e.Target.ID
+			lastMs = time.Now().UnixNano() / 1e6
+
+		} else if lastNodeID == e.Target.ID {
+			nowMs := time.Now().UnixNano() / 1e6
+
+			if nowMs - lastMs < c.speedMs {
+				// we have a double-click!
+				cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
+				lastNodeID = ""
+
+			} else {
+				lastNodeID = ""
+			}
+
+		} else {
+			lastNodeID = ""
+		}
+	})
+}
+
+func NewPlugin(speedMs int64) *Plugin {
+	if speedMs == 0 {
+		speedMs = 1000
+	}
+
+	c := &Plugin{speedMs}
+
+	return c
+}
