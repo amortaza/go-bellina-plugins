@@ -8,10 +8,14 @@ import (
 )
 
 var lastNodeID string
+var startX, startY int32
+var mouseOffsetX, mouseOffsetY int32
 
 type Event struct {
 	X, Y int32
 	Target *bl.Node
+	StartX, StartY int32
+	MouseOffsetX, MouseOffsetY int32
 }
 
 type Plugin struct {
@@ -41,6 +45,11 @@ func (c *Plugin) On(cb func(interface{})) {
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
 		if e.Action == xel.Down {
 			lastNodeID = e.Target.ID
+			startX, startY = bl.Mouse_X, bl.Mouse_Y
+
+			absX, absY := bl.GetNodeAbsolutePos(e.Target)
+			mouseOffsetX = bl.Mouse_X - absX
+			mouseOffsetY = bl.Mouse_Y - absY
 
 		} else if e.Action == xel.Up {
 			lastNodeID = ""
@@ -68,11 +77,19 @@ func (c *Plugin) On(cb func(interface{})) {
 	bl.OnMouseMove( func(e *bl.MouseMoveEvent) {
 		if lastNodeID == e.Target.ID {
 			// we have a click!
-			cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
+			cb(newEvent(e))
 		}
 	})
 }
 
+func newEvent(e *bl.MouseMoveEvent) Event {
+	return Event{
+		bl.Mouse_X, bl.Mouse_X,
+		e.Target,
+		startX, startY,
+		mouseOffsetX, mouseOffsetY,
+	}
+}
 
 func NewPlugin() *Plugin {
 	c := &Plugin{}
