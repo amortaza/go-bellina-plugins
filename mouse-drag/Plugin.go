@@ -26,6 +26,29 @@ func (c *Plugin) Name() string {
 }
 
 func (c *Plugin) Init() {
+	event.RegisterLongTerm(bl.Mouse_Button_Event_Type, func(mouseButtonEvent event.Event) {
+
+		e := mouseButtonEvent.(*bl.MouseButtonEvent)
+
+		if e.Action == xel.Up {
+			lastNodeID = ""
+		}
+	})
+
+	event.RegisterLongTerm(bl.Mouse_Move_Event_Type, func(mouseMoveEvent event.Event) {
+
+		if lastNodeID == "" {
+			return
+		}
+
+		e := mouseMoveEvent.(*bl.MouseMoveEvent)
+
+		node := bl.GetNodeByID( lastNodeID )
+
+		e.Target = node
+
+		node.CallMouseMoveCallbacks(e)
+	})
 }
 
 func (c *Plugin) Uninit() {
@@ -36,15 +59,6 @@ func (c *Plugin) On(cb func(interface{})) {
 }
 
 func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func(interface{})) {
-
-	event.RegisterShortTerm(bl.Mouse_Button_Event_Type, func(mouseButtonEvent event.Event) {
-
-		e := mouseButtonEvent.(*bl.MouseButtonEvent)
-
-		if e.Action == xel.Up {
-			lastNodeID = ""
-		}
-	})
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
 		if e.Action == xel.Down {
@@ -68,21 +82,6 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 		} else {
 			fmt.Println("Button action not recognized in click.Plugin")
 		}
-	})
-
-	event.RegisterShortTerm(bl.Mouse_Move_Event_Type, func(mouseMoveEvent event.Event) {
-
-		if lastNodeID == "" {
-			return
-		}
-
-		e := mouseMoveEvent.(*bl.MouseMoveEvent)
-
-		node := bl.GetNodeByID( lastNodeID )
-
-		e.Target = node
-
-		node.CallMouseMoveCallbacks(e)
 	})
 
 	bl.OnMouseMove( func(e *bl.MouseMoveEvent) {
