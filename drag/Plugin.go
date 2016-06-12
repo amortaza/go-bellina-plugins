@@ -1,8 +1,9 @@
-package draggable
+package drag
 
 import (
 	"bellina"
 	"plugin/mouse-drag"
+	"fmt"
 )
 
 type Event struct {
@@ -14,7 +15,7 @@ type Plugin struct {
 }
 
 func (c *Plugin) Name() string {
-	return "draggable"
+	return "drag"
 }
 
 func (c *Plugin) Init() {
@@ -25,7 +26,7 @@ func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
-	panic("On2 not supported for draggable plugin")
+	fmt.Println("On2 not supported for draggable plugin")
 }
 
 func (c *Plugin) On(cb func(interface{})) {
