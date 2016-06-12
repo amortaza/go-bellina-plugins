@@ -26,6 +26,10 @@ func (c *Plugin) Init() {
 func (c *Plugin) Uninit() {
 }
 
+func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
+	panic("On2 not supoorted in click.Plugin")
+}
+
 func (c *Plugin) On(cb func(interface{})) {
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {

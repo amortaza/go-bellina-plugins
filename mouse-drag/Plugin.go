@@ -32,6 +32,10 @@ func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On(cb func(interface{})) {
+	c.On2(cb, nil, nil)
+}
+
+func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func(interface{})) {
 
 	event.RegisterShortTerm(bl.Mouse_Button_Event_Type, func(mouseButtonEvent event.Event) {
 
@@ -51,9 +55,16 @@ func (c *Plugin) On(cb func(interface{})) {
 			mouseOffsetX = bl.Mouse_X - absX
 			mouseOffsetY = bl.Mouse_Y - absY
 
+			if startCb != nil {
+				startCb(newEvent(bl.Mouse_X, bl.Mouse_Y, e.Target))
+			}
+
 		} else if e.Action == xel.Up {
 			lastNodeID = ""
 
+			if endCb != nil {
+				endCb(newEvent(bl.Mouse_X, bl.Mouse_Y, e.Target))
+			}
 		} else {
 			fmt.Println("Button action not recognized in click.Plugin")
 		}
@@ -77,15 +88,15 @@ func (c *Plugin) On(cb func(interface{})) {
 	bl.OnMouseMove( func(e *bl.MouseMoveEvent) {
 		if lastNodeID == e.Target.ID {
 			// we have a click!
-			cb(newEvent(e))
+			cb(newEvent(e.X, e.Y, e.Target))
 		}
 	})
 }
 
-func newEvent(e *bl.MouseMoveEvent) Event {
+func newEvent(mouseX, mouseY int32, target *bl.Node) Event {
 	return Event{
-		bl.Mouse_X, bl.Mouse_X,
-		e.Target,
+		mouseX, mouseY,
+		target,
 		startX, startY,
 		mouseOffsetX, mouseOffsetY,
 	}

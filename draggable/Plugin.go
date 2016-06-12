@@ -24,6 +24,10 @@ func (c *Plugin) Init() {
 func (c *Plugin) Uninit() {
 }
 
+func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
+	panic("On2 not supported for draggable plugin")
+}
+
 func (c *Plugin) On(cb func(interface{})) {
 
 	shadow := bl.EnsureShadow()
@@ -38,6 +42,9 @@ func (c *Plugin) On(cb func(interface{})) {
 		absX, absY := bl.GetNodeAbsolutePos(e.Target.Parent)
 		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX
 		shadow.Top = bl.Mouse_Y - e.MouseOffsetY - absY
+
+		e.Target.Left = shadow.Left
+		e.Target.Top = shadow.Top
 
 		cb(newEvent(e.Target))
 	})

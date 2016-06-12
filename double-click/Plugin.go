@@ -29,6 +29,10 @@ func (c *Plugin) Init() {
 func (c *Plugin) Uninit() {
 }
 
+func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
+	panic("On2 not supported for double-click plugin")
+}
+
 func (c *Plugin) On(cb func(interface{})) {
 
 	bl.On("click", func(i interface{}) {
