@@ -87,7 +87,9 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 	bl.OnMouseMove( func(e *bl.MouseMoveEvent) {
 		if lastNodeID == e.Target.ID {
 			// we have a click!
-			cb(newEvent(e.X, e.Y, e.Target))
+			if cb != nil {
+				cb(newEvent(e.X, e.Y, e.Target))
+			}
 		}
 	})
 }

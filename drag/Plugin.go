@@ -47,7 +47,9 @@ func (c *Plugin) On(cb func(interface{})) {
 		e.Target.Left = shadow.Left
 		e.Target.Top = shadow.Top
 
-		cb(newEvent(e.Target))
+		if cb != nil {
+			cb(newEvent(e.Target))
+		}
 	})
 }
 

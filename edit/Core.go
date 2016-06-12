@@ -1,31 +1,35 @@
-package click
+package edit
 
 import (
 	"bellina"
+	"plugin/focus"
 )
 
-var lastNodeID string
+var g_editInfoByEditId map[string] *EditInfo
 
-type Event struct {
-	X, Y int32
-	Target *bl.Node
-}
+//type Event struct {
+//	X, Y int32
+//	Target *bl.Node
+//}
 
 type Plugin struct {
 }
 
 func (c *Plugin) Name() string {
-	return "click"
+	return "edit"
 }
 
 func (c *Plugin) Init() {
+	bl.Plugin( focus.NewPlugin() )
+
+	g_editInfoByEditId = make(map[string] *EditInfo)
 }
 
 func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
-	panic("On2 not supoorted in click.Plugin")
+	panic("On2 not supported for edit plugin")
 }
 
 func NewPlugin() *Plugin {
@@ -33,3 +37,4 @@ func NewPlugin() *Plugin {
 
 	return c
 }
+

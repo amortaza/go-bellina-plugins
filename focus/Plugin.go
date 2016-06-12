@@ -13,6 +13,7 @@ var g_keyCbByNodeId map[string] func(interface{})
 
 type Event struct {
 	Target *bl.Node
+	KeyEvent *bl.KeyEvent
 }
 
 func (e *Event) Type() string {
@@ -39,7 +40,8 @@ func (c *Plugin) Init() {
 		cb, ok := g_keyCbByNodeId[lastNodeID]
 
 		if ok {
-			cb(nil)
+			node := bl.GetNodeByID(lastNodeID)
+			cb(newEvent(node, e.(*bl.KeyEvent)))
 		}
 	})
 
@@ -74,8 +76,8 @@ func (c *Plugin) On(cb func(interface{})) {
 	})
 }
 
-func newEvent(target *bl.Node) Event {
-	return Event{target}
+func newEvent(target *bl.Node, keyEvent *bl.KeyEvent) Event {
+	return Event{target, keyEvent}
 }
 
 func NewPlugin() *Plugin {
