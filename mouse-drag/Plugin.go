@@ -25,6 +25,9 @@ func (c *Plugin) Name() string {
 	return "mouse-drag"
 }
 
+func (c *Plugin) Tick() {
+}
+
 func (c *Plugin) Init() {
 	event.RegisterLongTerm(bl.Mouse_Button_Event_Type, func(mouseButtonEvent event.Event) {
 

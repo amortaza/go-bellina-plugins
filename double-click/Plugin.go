@@ -22,6 +22,9 @@ func (c *Plugin) Name() string {
 	return "double-click"
 }
 
+func (c *Plugin) Tick() {
+}
+
 func (c *Plugin) Init() {
 	bl.Plugin( click.NewPlugin() )
 }

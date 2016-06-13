@@ -3,32 +3,20 @@ package focus
 import (
 	"bellina"
 	"plugin/click"
-	"fmt"
 	"bellina/event"
 )
-
-var lastNodeID string
-
-var g_keyCbByNodeId map[string] func(interface{})
-
-type Event struct {
-	Target *bl.Node
-	KeyEvent *bl.KeyEvent
-}
 
 func (e *Event) Type() string {
 	return "focus"
 }
 
-type Plugin struct {
-}
-
-func (c *Plugin) Name() string {
+func (p *Plugin) Name() string {
 	return "focus"
 }
 
-func (c *Plugin) Init() {
+func (p *Plugin) Init() {
 	g_keyCbByNodeId = make(map[string] func(interface{}))
+	g_endCbByNodeId = make(map[string] func(interface{}))
 
 	bl.Plugin( click.NewPlugin() )
 	
@@ -53,35 +41,41 @@ func (c *Plugin) Init() {
 		e := mbe.(*bl.MouseButtonEvent)
 
 		if e.Target.ID != lastNodeID {
+
+			endCb, ok := g_endCbByNodeId[lastNodeID]
+
+			if ok {
+				endCb(newEvent(e.Target, nil))
+			}
+
 			lastNodeID = ""
 		}
 	})
 }
 
-func (c *Plugin) Uninit() {
+func (p *Plugin) On(cb func(interface{})) {
+	p.On2(cb, nil, nil)
 }
 
-func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
-	fmt.Println("On2 not supported for focusable")
-}
-
-func (c *Plugin) On(cb func(interface{})) {
+func (p *Plugin) On2(	cb func(interface{}),
+			startCb func(interface{}),
+			endCb func(interface{})) {
 
 	bl.On("click", func(i interface{}) {
 		e := i.(click.Event)
 
+		if lastNodeID != e.Target.ID {
+			if startCb != nil {
+				startCb(newEvent(e.Target, nil))
+			}
+		}
+
 		lastNodeID = e.Target.ID
 
 		g_keyCbByNodeId[lastNodeID] = cb
+
+		if endCb != nil {
+			g_endCbByNodeId[lastNodeID] = endCb
+		}
 	})
-}
-
-func newEvent(target *bl.Node, keyEvent *bl.KeyEvent) Event {
-	return Event{target, keyEvent}
-}
-
-func NewPlugin() *Plugin {
-	c := &Plugin{}
-
-	return c
 }

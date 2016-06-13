@@ -21,6 +21,9 @@ func (c *Plugin) Name() string {
 func (c *Plugin) Init() {
 }
 
+func (c *Plugin) Tick() {
+}
+
 func (c *Plugin) Uninit() {
 }
 

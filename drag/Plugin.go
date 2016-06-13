@@ -22,6 +22,9 @@ func (c *Plugin) Init() {
 	bl.Plugin( mouse_drag.NewPlugin() )
 }
 
+func (c *Plugin) Tick() {
+}
+
 func (c *Plugin) Uninit() {
 }
 

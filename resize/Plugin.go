@@ -17,6 +17,9 @@ func (c *Plugin) Name() string {
 	return "resize"
 }
 
+func (c *Plugin) Tick() {
+}
+
 func (c *Plugin) Init() {
 	bl.Plugin( mouse_drag.NewPlugin() )
 }
