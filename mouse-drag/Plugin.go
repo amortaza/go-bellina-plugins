@@ -33,7 +33,7 @@ func (c *Plugin) Init() {
 
 		e := mouseButtonEvent.(*bl.MouseButtonEvent)
 
-		if e.Action == xel.Up {
+		if e.Action == xel.Action_Up {
 			lastNodeID = ""
 		}
 	})
@@ -64,7 +64,7 @@ func (c *Plugin) On(cb func(interface{})) {
 func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func(interface{})) {
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
-		if e.Action == xel.Down {
+		if e.Action == xel.Action_Down {
 			lastNodeID = e.Target.ID
 			startX, startY = bl.Mouse_X, bl.Mouse_Y
 
@@ -76,7 +76,7 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 				startCb(newEvent(bl.Mouse_X, bl.Mouse_Y, e.Target))
 			}
 
-		} else if e.Action == xel.Up {
+		} else if e.Action == xel.Action_Up {
 			lastNodeID = ""
 
 			if endCb != nil {

@@ -36,6 +36,8 @@ func (c *Plugin) On(cb func(interface{})) {
 	shadow := bl.EnsureShadow()
 	editInfo := ensureEditInfo(editId)
 
+	var fontheight int32
+
 	bl.Div()
 	{
 		bl.ID(editId)
@@ -46,11 +48,12 @@ func (c *Plugin) On(cb func(interface{})) {
 		bl.BorderColor(1,1,0)
 		bl.BorderThickness(bl.FourOnesInt)
 		bl.FontNudge(10,5)
-		bl.Font("arial", 11)
+		bl.Font("arial", 12)
 		bl.FontColor(1,1,0)
 		bl.Label(shadow.Label)
 
-		bl.Dim(512, bl.GetFontHeight() + 4 )
+		fontheight =  bl.GetFontHeight() + 4
+		bl.Dim(512, fontheight )
 
 		bl.On("drag", nil)
 
@@ -59,7 +62,7 @@ func (c *Plugin) On(cb func(interface{})) {
 			e := focusEvent.(focus.Event)
 
 
-			if e.KeyEvent.Action == xel.Down {
+			if e.KeyEvent.Action == xel.Action_Down {
 				key := e.KeyEvent.Key
 				processKeyDown(key, e.KeyEvent.Alt, e.KeyEvent.Ctrl, e.KeyEvent.Shift, shadow, editInfo)
 			}
@@ -78,7 +81,7 @@ func (c *Plugin) On(cb func(interface{})) {
 		bl.Div()
 		{
 			bl.ID(editId+":cursoer")
-			bl.Dim(2,46)
+			bl.Dim(2, fontheight)
 			bl.Pos(getCursorX(editInfo.cursorPos, shadow.Label, parent.FontName, parent.FontSize),0)
 			bl.Color(1,.95,.95)
 			bl.NodeOpacity1f(editInfo.opacity)

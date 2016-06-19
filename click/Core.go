@@ -10,10 +10,10 @@ func (c *Plugin) On(cb func(interface{})) {
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
 
-		if e.Action == xel.Down {
+		if e.Action == xel.Action_Down {
 			lastNodeID = e.Target.ID
 
-		} else if e.Action == xel.Up {
+		} else if e.Action == xel.Action_Up {
 
 			if lastNodeID == e.Target.ID {
 				// we have a click!
