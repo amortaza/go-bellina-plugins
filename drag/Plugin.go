@@ -22,6 +22,12 @@ func (c *Plugin) Init() {
 	bl.Plugin( mouse_drag.NewPlugin() )
 }
 
+func (c *Plugin) OnNodeAdded(node *bl.Node) {
+}
+
+func (c *Plugin) OnNodeRemoved(node *bl.Node) {
+}
+
 func (c *Plugin) Tick() {
 }
 

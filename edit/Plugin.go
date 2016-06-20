@@ -8,6 +8,7 @@ import (
 )
 
 var a float64
+
 func (c *Plugin) Tick() {
 	editInfo, ok := g_editInfoByEditId["ace"]
 
@@ -29,6 +30,12 @@ type EditInfo struct {
 	hasFocus bool
 }
 
+func (c *Plugin) OnNodeAdded(node *bl.Node) {
+}
+
+func (c *Plugin) OnNodeRemoved(node *bl.Node) {
+}
+
 func (c *Plugin) On(cb func(interface{})) {
 
 	editId := "ace"
@@ -48,14 +55,12 @@ func (c *Plugin) On(cb func(interface{})) {
 		bl.BorderColor(1,1,0)
 		bl.BorderThickness(bl.FourOnesInt)
 		bl.FontNudge(10,5)
-		bl.Font("arial", 12)
+		bl.Font("tahoma", 7)
 		bl.FontColor(1,1,0)
 		bl.Label(shadow.Label)
 
 		fontheight =  bl.GetFontHeight() + 4
 		bl.Dim(512, fontheight )
-
-		bl.On("drag", nil)
 
 		bl.On2("focus", func(focusEvent interface{}){
 

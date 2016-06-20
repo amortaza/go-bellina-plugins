@@ -14,13 +14,19 @@ func (p *Plugin) Name() string {
 	return "focus"
 }
 
+func (c *Plugin) OnNodeAdded(node *bl.Node) {
+}
+
+func (c *Plugin) OnNodeRemoved(node *bl.Node) {
+}
+
 func (p *Plugin) Init() {
 	g_keyCbByNodeId = make(map[string] func(interface{}))
 	g_endCbByNodeId = make(map[string] func(interface{}))
 
 	bl.Plugin( click.NewPlugin() )
 	
-	event.RegisterLongTerm(bl.Key_Event_Type, func(e event.Event) {
+	event.RegisterLongTerm(bl.EventType_Key, func(e event.Event) {
 		if lastNodeID == "" {
 			return
 		}
@@ -33,7 +39,7 @@ func (p *Plugin) Init() {
 		}
 	})
 
-	event.RegisterLongTerm(bl.Mouse_Button_Event_Type, func(mbe event.Event) {
+	event.RegisterLongTerm(bl.EventType_Mouse_Button, func(mbe event.Event) {
 		if lastNodeID == "" {
 			return
 		}

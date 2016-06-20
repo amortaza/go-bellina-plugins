@@ -1,5 +1,9 @@
 package zindex
 
+import (
+	"bellina"
+)
+
 type Event struct {
 }
 
@@ -15,6 +19,13 @@ func (c *Plugin) Init() {
 }
 
 func (c *Plugin) Tick() {
+}
+
+func (c *Plugin) OnNodeAdded(node *bl.Node) {
+}
+
+func (c *Plugin) OnNodeRemoved(node *bl.Node) {
+	delete(g_ctxByNodeId, node.ID)
 }
 
 func (c *Plugin) Uninit() {

@@ -28,8 +28,14 @@ func (c *Plugin) Name() string {
 func (c *Plugin) Tick() {
 }
 
+func (c *Plugin) OnNodeAdded(node *bl.Node) {
+}
+
+func (c *Plugin) OnNodeRemoved(node *bl.Node) {
+}
+
 func (c *Plugin) Init() {
-	event.RegisterLongTerm(bl.Mouse_Button_Event_Type, func(mouseButtonEvent event.Event) {
+	event.RegisterLongTerm(bl.EventType_Mouse_Button, func(mouseButtonEvent event.Event) {
 
 		e := mouseButtonEvent.(*bl.MouseButtonEvent)
 
@@ -38,7 +44,7 @@ func (c *Plugin) Init() {
 		}
 	})
 
-	event.RegisterLongTerm(bl.Mouse_Move_Event_Type, func(mouseMoveEvent event.Event) {
+	event.RegisterLongTerm(bl.EventType_Mouse_Move, func(mouseMoveEvent event.Event) {
 
 		if lastNodeID == "" {
 			return

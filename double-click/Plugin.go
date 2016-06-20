@@ -25,6 +25,12 @@ func (c *Plugin) Name() string {
 func (c *Plugin) Tick() {
 }
 
+func (c *Plugin) OnNodeAdded(node *bl.Node) {
+}
+
+func (c *Plugin) OnNodeRemoved(node *bl.Node) {
+}
+
 func (c *Plugin) Init() {
 	bl.Plugin( click.NewPlugin() )
 }
