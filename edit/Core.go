@@ -78,31 +78,31 @@ func doDelete(src string, pos int) string {
 	return p1 + p2
 }
 
-func processKeyDown(key xel.Key, alt, ctrl, shift bool, shadow *bl.ShadowNode, editInfo *EditInfo) {
+func processKeyDown(key xel.KeyboardKey, alt, ctrl, shift bool, shadow *bl.ShadowNode, editInfo *EditInfo) {
 	bt := xel.KeyToBehavior(key, false, true)
 
-	if bt == xel.KEY_BEHAVIOR_IS_CHAR {
+	if bt == xel.Key_Behavior_CHAR {
 		shadow.Label = insertChar(shadow.Label, editInfo.cursorPos, xel.KeyToChar(key, shift, true))
 		editInfo.cursorPos++
 
 	} else {
-		if key == xel.KEY_HOME {
+		if key == xel.Key_HOME {
 			editInfo.cursorPos = 0
 		}
-		if key == xel.KEY_END {
+		if key == xel.Key_END {
 			editInfo.cursorPos = len(shadow.Label)
 		}
-		if key == xel.KEY_DELETE {
+		if key == xel.Key_DELETE {
 			shadow.Label = doDelete(shadow.Label, editInfo.cursorPos)
 		}
-		if key == xel.KEY_BACKSPACE {
+		if key == xel.Key_BACKSPACE {
 			shadow.Label = backspace(shadow.Label, editInfo.cursorPos)
 			editInfo.cursorPos = int(math.Max(0, float64(editInfo.cursorPos-1)))
 		}
-		if key == xel.KEY_LEFT {
+		if key == xel.Key_LEFT {
 			editInfo.cursorPos = int(math.Max(0, float64(editInfo.cursorPos-1)))
 		}
-		if key == xel.KEY_RIGHT {
+		if key == xel.Key_RIGHT {
 			editInfo.cursorPos = int(math.Min(float64(editInfo.cursorPos+1), float64(len(shadow.Label))))
 		}
 	}

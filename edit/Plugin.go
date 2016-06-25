@@ -67,7 +67,7 @@ func (c *Plugin) On(cb func(interface{})) {
 			e := focusEvent.(focus.Event)
 
 
-			if e.KeyEvent.Action == xel.Action_Down {
+			if e.KeyEvent.Action == xel.Button_Action_Down {
 				key := e.KeyEvent.Key
 				processKeyDown(key, e.KeyEvent.Alt, e.KeyEvent.Ctrl, e.KeyEvent.Shift, shadow, editInfo)
 			}
