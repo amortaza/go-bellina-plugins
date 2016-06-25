@@ -62,7 +62,7 @@ func (c *Plugin) On(cb func(interface{})) {
 		bl.Current_Node.Kids.PushBack(node)
 
 		bl.OnMouseButtonOnNode(node, func(e *bl.MouseButtonEvent) {
-			if e.Action == xel.Button_Action_Down {
+			if e.ButtonAction == xel.Button_Action_Down {
 				ctx.orderByNodeId[node.ID] = ctx.nextOrder
 				ctx.nextOrder++
 			}

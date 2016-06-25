@@ -4,6 +4,7 @@ import (
 	"github.com/amortaza/go-xel"
 	"fmt"
 	"github.com/amortaza/go-bellina"
+	"github.com/amortaza/go-bellina/event"
 )
 
 var lastNodeID string
@@ -39,24 +40,29 @@ func (c *Plugin) On(cb func(interface{})) {
 	c.On2(cb, nil, nil)
 }
 
-
 func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(interface{})) {
 
-	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
+	event.RegisterShortTerm(bl.EventType_Mouse_Button, func(event event.Event) {
 
-		if e.Action == xel.Button_Action_Down {
+		e := event.(*bl.MouseButtonEvent)
+
+		if e.ButtonAction == xel.Button_Action_Down {
+
 			lastNodeID = e.Target.ID
 
 			if onDown != nil {
 				onDown(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 			}
-		} else if e.Action == xel.Button_Action_Up {
+
+		} else if e.ButtonAction == xel.Button_Action_Up {
 
 			if lastNodeID == e.Target.ID {
 				// we have a click!
 				cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 
 			} else {
+				lastNodeID = ""
+
 				if onUpAndMiss != nil {
 					onUpAndMiss(nil)
 				}
