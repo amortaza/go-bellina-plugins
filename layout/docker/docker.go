@@ -11,7 +11,23 @@ var Z_ANCHOR_TOP uint32 = 1 << 2
 var Z_ANCHOR_BOTTOM uint32 = 1 << 3
 
 type State struct {
-	AnchorFlags uint32
+	anchorFlags uint32
+}
+
+func (s *State) AnchorBottom() {
+	s.anchorFlags |= Z_ANCHOR_BOTTOM
+}
+
+func (s *State) AnchorTop() {
+	s.anchorFlags |= Z_ANCHOR_TOP
+}
+
+func (s *State) AnchorRight() {
+	s.anchorFlags |= Z_ANCHOR_RIGHT
+}
+
+func (s *State) AnchorLeft() {
+	s.anchorFlags |= Z_ANCHOR_LEFT
 }
 
 var g_stateByNodeId map[string] *State
@@ -51,27 +67,27 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 	getOrCreateState(shadow.ID)
 	parentShadow := bl.EnsureShadowByID(shadow.ParentID)
 
-	if state.AnchorFlags & Z_ANCHOR_RIGHT != 0 {
-		if state.AnchorFlags & Z_ANCHOR_LEFT != 0 {
+	if state.anchorFlags & Z_ANCHOR_RIGHT != 0 {
+		if state.anchorFlags & Z_ANCHOR_LEFT != 0 {
 			shadow.Left = 0;
 			shadow.Width = parentShadow.Width
 
 		} else {
 			shadow.Left = parentShadow.Width - shadow.Width
 		}
-	} else if state.AnchorFlags & Z_ANCHOR_LEFT != 0 {
+	} else if state.anchorFlags & Z_ANCHOR_LEFT != 0 {
 		shadow.Left = 0;
 	}
 
-	if state.AnchorFlags & Z_ANCHOR_BOTTOM != 0 {
-		if state.AnchorFlags & Z_ANCHOR_TOP != 0 {
+	if state.anchorFlags & Z_ANCHOR_BOTTOM != 0 {
+		if state.anchorFlags & Z_ANCHOR_TOP != 0 {
 			shadow.Top = 0;
 			shadow.Height = parentShadow.Height
 
 		} else {
 			shadow.Top = parentShadow.Height - shadow.Height
 		}
-	} else if state.AnchorFlags & Z_ANCHOR_TOP != 0 {
+	} else if state.anchorFlags & Z_ANCHOR_TOP != 0 {
 		shadow.Top = 0;
 	}
 }
