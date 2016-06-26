@@ -33,11 +33,11 @@ func (c *Plugin) GetState() interface{} {
 }
 
 func (c *Plugin) Tick() {
-	for key, state := range g_stateByNodeId {
-		shadow, _ := bl.GetShadow(key)
-
-		runLogic(shadow, state)
-	}
+	//for key, state := range g_stateByNodeId {
+	//	shadow, _ := bl.GetShadow(key)
+	//
+	//	runLogic(shadow, state)
+	//}
 }
 
 func runLogic(shadow *bl.ShadowNode, state *State) {
@@ -70,8 +70,8 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 }
 
 func (c *Plugin) On(cb func(interface{})) {
-	getOrCreateState(bl.Current_Node.ID)
-	bl.EnsureShadow()
+	state := getOrCreateState(bl.Current_Node.ID)
+	shadow := bl.EnsureShadow()
 
 	for e := bl.Current_Node.Kids.Front(); e != nil; e = e.Next() {
 		kid := e.Value.(*bl.Node)
@@ -80,5 +80,9 @@ func (c *Plugin) On(cb func(interface{})) {
 		kid.Top = kidShadow.Top
 		kid.Height = kidShadow.Height
 	}
+
+	bl.AddPluginOnTick(func() {
+		runLogic(shadow, state)
+	})
 }
 

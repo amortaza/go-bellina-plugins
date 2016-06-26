@@ -2,7 +2,6 @@ package vert
 
 import (
 	"github.com/amortaza/go-bellina"
-	"fmt"
 )
 
 type Plugin struct {
@@ -20,7 +19,6 @@ func (c *Plugin) OnNodeRemoved(node *bl.Node) {
 
 func (c *Plugin) Init() {
 	g_stateByNodeId = make(map[string] *State)
-	fmt.Println("horiz init")
 }
 
 func (c *Plugin) Uninit() {

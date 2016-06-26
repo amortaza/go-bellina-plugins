@@ -1,18 +1,16 @@
-package horiz
+package pad
 
 import (
 	"github.com/amortaza/go-bellina"
 )
 
-var Param_Percent = "percent"
+var Param_Left = "left"
+var Param_Top = "top"
+var Param_Right = "right"
+var Param_Bottom = "bottom"
 
 type State struct {
-	//anchorFlags uint32
 }
-
-//func (s *State) AnchorBottom() {
-//	s.anchorFlags |= Z_ANCHOR_BOTTOM
-//}
 
 var g_stateByNodeId map[string] *State
 
@@ -38,29 +36,29 @@ func (c *Plugin) Tick() {
 func runLogic(shadow *bl.ShadowNode, state *State) {
 	node := bl.GetNodeByID(shadow.ID)
 
-	var x int32 = 0
-	var kidShadow *bl.ShadowNode
-	var pct int32
-
-	parentW := shadow.Width
+	padLeft := bl.GetI_fromNodeID(shadow.ID, "pad", Param_Left)
+	padTop := bl.GetI_fromNodeID(shadow.ID, "pad", Param_Top)
+	padRight := bl.GetI_fromNodeID(shadow.ID, "pad", Param_Right)
+	//padBottom := bl.GetI_fromNodeID(shadow.ID, "pad", Param_Bottom)
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
 	    	kid := e.Value.(*bl.Node)
-		kidShadow = bl.EnsureShadowByID(kid.ID)
 
-		kidShadow.Left = x
+		kidShadow := bl.EnsureShadowByID(kid.ID)
 
-		pct = bl.GetI_fromNodeID(kid.ID, "horiz", "percent")
-
-		if pct > 0 {
-			kidShadow.Width = parentW * pct / 100
+		if kidShadow.Left < padLeft {
+			kidShadow.Left = padLeft
 		}
 
-		x += kidShadow.Width
-	}
+		if kidShadow.Top < padTop {
+			kidShadow.Top = padTop
+		}
 
-	if pct == -1 {
-		kidShadow.Width = parentW - kidShadow.Left - 1
+		right := kidShadow.Left + kidShadow.Width - 1
+
+		if right > shadow.Width - padRight {
+			kid.Width = shadow.Width - padRight - kid.Left
+		}
 	}
 }
 
@@ -73,11 +71,19 @@ func (c *Plugin) On(cb func(interface{})) {
 		kidShadow := bl.EnsureShadowByID(kid.ID)
 
 		kid.Left = kidShadow.Left
+		kid.Top = kidShadow.Top
 		kid.Width = kidShadow.Width
+		kid.Height = kidShadow.Height
 	}
 
-	bl.AddPluginOnTick(func() {
+	bl.AddPluginOnTick( func() {
 		runLogic(shadow, state)
 	})
 }
 
+func SetPaddingAll(pad int32) {
+	bl.SetI("pad", Param_Left, pad)
+	bl.SetI("pad", Param_Top, pad)
+	bl.SetI("pad", Param_Right, pad)
+	bl.SetI("pad", Param_Bottom, pad)
+}

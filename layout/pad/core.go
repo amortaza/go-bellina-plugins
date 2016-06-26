@@ -1,4 +1,4 @@
-package horiz
+package pad
 
 import (
 	"github.com/amortaza/go-bellina"
@@ -8,7 +8,7 @@ type Plugin struct {
 }
 
 func (c *Plugin) Name() string {
-	return "horiz"
+	return "pad"
 }
 
 func (c *Plugin) OnNodeAdded(node *bl.Node) {
@@ -25,7 +25,7 @@ func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
-	panic("On2 not supported for horiz plugin")
+	panic("On2 not supported for pad plugin")
 }
 
 func NewPlugin() *Plugin {
