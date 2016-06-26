@@ -22,6 +22,9 @@ func (c *Plugin) Name() string {
 	return "edit"
 }
 
+func (c *Plugin) GetState() interface{} {
+	return nil
+}
 
 func (c *Plugin) Init() {
 	bl.Plugin( focus.NewPlugin() )

@@ -25,6 +25,10 @@ func (c *Plugin) Name() string {
 	return "mouse-drag"
 }
 
+func (c *Plugin) GetState() interface{} {
+	return nil
+}
+
 func (c *Plugin) Tick() {
 }
 

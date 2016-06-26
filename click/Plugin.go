@@ -21,6 +21,10 @@ func (c *Plugin) Name() string {
 	return "click"
 }
 
+func (c *Plugin) GetState() interface{} {
+	return nil
+}
+
 func (c *Plugin) Init() {
 }
 

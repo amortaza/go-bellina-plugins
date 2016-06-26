@@ -22,6 +22,10 @@ func (c *Plugin) Init() {
 	bl.Plugin( mouse_drag.NewPlugin() )
 }
 
+func (c *Plugin) GetState() interface{} {
+	return nil
+}
+
 func (c *Plugin) OnNodeAdded(node *bl.Node) {
 }
 

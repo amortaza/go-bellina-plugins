@@ -17,6 +17,10 @@ func (c *Plugin) Name() string {
 	return "resize"
 }
 
+func (c *Plugin) GetState() interface{} {
+	return nil
+}
+
 func (c *Plugin) Tick() {
 }
 
@@ -60,9 +64,11 @@ func (c *Plugin) On(cb func(interface{})) {
 			shadow.Width = int32(math.Max(float64(startWidth + diffX), 16))
 			shadow.Height = int32(math.Max(float64(startHeight + diffY), 16))
 
-			e.Target.Width, e.Target.Height = shadow.Width, shadow.Height
+			if cb != nil {
+				e.Target.Width, e.Target.Height = shadow.Width, shadow.Height
 
-			cb(newEvent(e.Target))
+				cb(newEvent(e.Target))
+			}
 		},
 
 		// start drag

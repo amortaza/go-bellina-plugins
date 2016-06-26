@@ -22,6 +22,10 @@ func (c *Plugin) Name() string {
 	return "double-click"
 }
 
+func (c *Plugin) GetState() interface{} {
+	return nil
+}
+
 func (c *Plugin) Tick() {
 }
 
