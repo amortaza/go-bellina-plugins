@@ -52,19 +52,19 @@ func (c *Plugin) Name() string {
 }
 
 func (c *Plugin) GetState() interface{} {
-	return getOrCreateState(bl.Current_Node.ID)
+	return getOrCreateState(bl.Current_Node.Id)
 }
 
 func (c *Plugin) Tick() {
 	for key, state := range g_stateByNodeId {
-		shadow, _ := bl.GetShadow(key)
+		shadow, _ := bl.GetShadowById(key)
 
 		runLogic(shadow, state)
 	}
 }
 
 func runLogic(shadow *bl.ShadowNode, state *State) {
-	getOrCreateState(shadow.ID)
+	getOrCreateState(shadow.Id)
 	parentShadow := bl.EnsureShadowByID(shadow.ParentID)
 
 	if state.anchorFlags & Z_ANCHOR_RIGHT != 0 {
@@ -93,7 +93,7 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 }
 
 func (c *Plugin) On(cb func(interface{})) {
-	getOrCreateState(bl.Current_Node.ID)
+	getOrCreateState(bl.Current_Node.Id)
 
 	shadow := bl.EnsureShadow()
 

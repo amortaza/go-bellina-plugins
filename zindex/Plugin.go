@@ -29,7 +29,7 @@ func (c *Plugin) OnNodeAdded(node *bl.Node) {
 }
 
 func (c *Plugin) OnNodeRemoved(node *bl.Node) {
-	delete(g_ctxByNodeId, node.ID)
+	delete(g_ctxByNodeId, node.Id)
 }
 
 func (c *Plugin) Uninit() {

@@ -52,10 +52,10 @@ func (c *Plugin) On(cb func(interface{})) {
 		e := i.(click.Event)
 
 		if lastNodeID == "" {
-			lastNodeID = e.Target.ID
+			lastNodeID = e.Target.Id
 			lastMs = time.Now().UnixNano() / 1e6
 
-		} else if lastNodeID == e.Target.ID {
+		} else if lastNodeID == e.Target.Id {
 			nowMs := time.Now().UnixNano() / 1e6
 
 			if nowMs - lastMs < c.speedMs {

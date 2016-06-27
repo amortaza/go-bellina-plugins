@@ -34,9 +34,9 @@ func (c *Plugin) Init() {
 
 		currentNode := event.Target
 
-		if lastNodeID != currentNode.ID {
+		if lastNodeID != currentNode.Id {
 
-			inID, outID := currentNode.ID, lastNodeID
+			inID, outID := currentNode.Id, lastNodeID
 
 			if g_callbacksByNodeID.HasId(inID) {
 				eIn := NewEvent(inID, outID, true)
@@ -48,7 +48,7 @@ func (c *Plugin) Init() {
 				g_callbacksByNodeID.CallAll(outID, eOut)
 			}
 
-			lastNodeID = currentNode.ID
+			lastNodeID = currentNode.Id
 		}
 	})
 }
@@ -66,7 +66,7 @@ func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On(cb func(interface{})) {
-	g_callbacksByNodeID.Add(bl.Current_Node.ID, cb)
+	g_callbacksByNodeID.Add(bl.Current_Node.Id, cb)
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {

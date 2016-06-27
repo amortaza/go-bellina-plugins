@@ -51,7 +51,7 @@ func (c *Plugin) On(cb func(interface{})) {
 	bl.On("mouse-drag", func(mouseDragEvent interface{}) {
 		e := mouseDragEvent.(mouse_drag.Event)
 
-		shadow, _ := bl.GetShadow(e.Target.ID)
+		shadow, _ := bl.GetShadowById(e.Target.Id)
 
 		absX, absY := bl.GetNodeAbsolutePos(e.Target.Parent)
 		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX

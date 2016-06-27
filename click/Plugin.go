@@ -52,7 +52,7 @@ func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss
 
 		if e.ButtonAction == xel.Button_Action_Down {
 
-			lastNodeID = e.Target.ID
+			lastNodeID = e.Target.Id
 
 			if onDown != nil {
 				onDown(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
@@ -60,7 +60,7 @@ func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss
 
 		} else if e.ButtonAction == xel.Button_Action_Up {
 
-			if lastNodeID == e.Target.ID {
+			if lastNodeID == e.Target.Id {
 				// we have a click!
 				cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 

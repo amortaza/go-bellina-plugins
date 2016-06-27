@@ -25,12 +25,12 @@ func (a ByOrder) Swap(i,j int) {a[i],a[j]=a[j],a[i]}
 func (a ByOrder) Less(i,j int) bool {return a[i].order < a[j].order}
 
 func (c *Plugin) On(cb func(interface{})) {
-	ctx, ok := g_ctxByNodeId[bl.Current_Node.ID]
+	ctx, ok := g_ctxByNodeId[bl.Current_Node.Id]
 
 	if !ok {
 		ctx = &Ctx{}
 		ctx.orderByNodeId = make(map[string] int)
-		g_ctxByNodeId[bl.Current_Node.ID] = ctx
+		g_ctxByNodeId[bl.Current_Node.Id] = ctx
 
 		var order int = 0
 		kids := bl.Current_Node.Kids
@@ -38,7 +38,7 @@ func (c *Plugin) On(cb func(interface{})) {
 		for e := kids.Front(); e != nil; e = e.Next() {
 		    	kid := e.Value.(*bl.Node)
 
-			ctx.orderByNodeId[kid.ID] = order
+			ctx.orderByNodeId[kid.Id] = order
 
 			order++
 		}
@@ -63,7 +63,7 @@ func (c *Plugin) On(cb func(interface{})) {
 
 		bl.OnMouseButtonOnNode(node, func(e *bl.MouseButtonEvent) {
 			if e.ButtonAction == xel.Button_Action_Down {
-				ctx.orderByNodeId[node.ID] = ctx.nextOrder
+				ctx.orderByNodeId[node.Id] = ctx.nextOrder
 				ctx.nextOrder++
 			}
 		})

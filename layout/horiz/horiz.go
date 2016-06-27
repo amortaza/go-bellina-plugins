@@ -29,14 +29,14 @@ func getOrCreateState(nodeId string) *State {
 }
 
 func (c *Plugin) GetState() interface{} {
-	return getOrCreateState(bl.Current_Node.ID)
+	return getOrCreateState(bl.Current_Node.Id)
 }
 
 func (c *Plugin) Tick() {
 }
 
 func runLogic(shadow *bl.ShadowNode, state *State) {
-	node := bl.GetNodeByID(shadow.ID)
+	node := bl.GetNodeByID(shadow.Id)
 
 	var x int32 = 0
 	var kidShadow *bl.ShadowNode
@@ -46,11 +46,11 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
 	    	kid := e.Value.(*bl.Node)
-		kidShadow = bl.EnsureShadowByID(kid.ID)
+		kidShadow = bl.EnsureShadowByID(kid.Id)
 
 		kidShadow.Left = x
 
-		pct = bl.GetI_fromNodeID(kid.ID, "horiz", "percent")
+		pct = bl.GetI_fromNodeID(kid.Id, "horiz", "percent")
 
 		if pct > 0 {
 			kidShadow.Width = parentW * pct / 100
@@ -65,12 +65,12 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 }
 
 func (c *Plugin) On(cb func(interface{})) {
-	state := getOrCreateState(bl.Current_Node.ID)
+	state := getOrCreateState(bl.Current_Node.Id)
 	shadow := bl.EnsureShadow()
 
 	for e := bl.Current_Node.Kids.Front(); e != nil; e = e.Next() {
 		kid := e.Value.(*bl.Node)
-		kidShadow := bl.EnsureShadowByID(kid.ID)
+		kidShadow := bl.EnsureShadowByID(kid.Id)
 
 		kid.Left = kidShadow.Left
 		kid.Width = kidShadow.Width

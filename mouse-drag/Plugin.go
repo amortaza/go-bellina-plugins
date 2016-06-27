@@ -75,7 +75,7 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
 		if e.ButtonAction == xel.Button_Action_Down {
-			lastNodeID = e.Target.ID
+			lastNodeID = e.Target.Id
 			startX, startY = bl.Mouse_X, bl.Mouse_Y
 
 			absX, absY := bl.GetNodeAbsolutePos(e.Target)
@@ -98,7 +98,7 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 	})
 
 	bl.OnMouseMove( func(e *bl.MouseMoveEvent) {
-		if lastNodeID == e.Target.ID {
+		if lastNodeID == e.Target.Id {
 			// we have a click!
 			if cb != nil {
 				cb(newEvent(e.X, e.Y, e.Target))
