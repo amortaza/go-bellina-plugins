@@ -6,10 +6,7 @@ import (
 	"fmt"
 )
 
-type Event struct {
-	X, Y int32
-	Target *bl.Node
-}
+var plugin *Plugin
 
 type Plugin struct {
 }
@@ -39,7 +36,7 @@ func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
-	fmt.Println("On2 not supported for draggable plugin")
+	fmt.Println("On2 not supported for drag plugin")
 }
 
 func (c *Plugin) On(cb func(interface{})) {
@@ -66,15 +63,9 @@ func (c *Plugin) On(cb func(interface{})) {
 	})
 }
 
-func newEvent(target *bl.Node) Event {
-	return Event{
-		bl.Mouse_X, bl.Mouse_X,
-		target,
-	}
-}
-
 func NewPlugin() *Plugin {
-	c := &Plugin{}
+	plugin = &Plugin{}
 
-	return c
+	return plugin
 }
+
