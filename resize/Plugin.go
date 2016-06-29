@@ -6,6 +6,8 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
+var plugin *Plugin
+
 type Event struct {
 	Target *bl.Node
 }
@@ -49,7 +51,7 @@ func (c *Plugin) On(cb func(interface{})) {
 
 	bl.Dim( shadow.Width, shadow.Height )
 
-	bl.On2( "mouse-drag",
+	mouse_drag.On2(
 
 		// on drag
 		func(mouseDragEvent interface{}) {
@@ -88,7 +90,7 @@ func newEvent(target *bl.Node) Event {
 }
 
 func NewPlugin() *Plugin {
-	c := &Plugin{}
+	plugin = &Plugin{}
 
-	return c
+	return plugin
 }

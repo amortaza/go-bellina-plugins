@@ -48,7 +48,7 @@ func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(int
 
 func (c *Plugin) On(cb func(interface{})) {
 
-	bl.On("click", func(i interface{}) {
+	click.On(func(i interface{}) {
 		e := i.(click.Event)
 
 		if lastNodeID == "" {

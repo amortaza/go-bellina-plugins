@@ -7,16 +7,7 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-var lastNodeID string
-var startX, startY int32
-var mouseOffsetX, mouseOffsetY int32
-
-type Event struct {
-	X, Y int32
-	Target *bl.Node
-	StartX, StartY int32
-	MouseOffsetX, MouseOffsetY int32
-}
+var plugin *Plugin
 
 type Plugin struct {
 }
@@ -107,17 +98,9 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 	})
 }
 
-func newEvent(mouseX, mouseY int32, target *bl.Node) Event {
-	return Event{
-		mouseX, mouseY,
-		target,
-		startX, startY,
-		mouseOffsetX, mouseOffsetY,
-	}
-}
-
 func NewPlugin() *Plugin {
-	c := &Plugin{}
+	plugin = &Plugin{}
 
-	return c
+	return plugin
 }
+

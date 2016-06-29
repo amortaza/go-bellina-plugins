@@ -48,7 +48,7 @@ func (c *Plugin) On(cb func(interface{})) {
 
 	bl.Pos( shadow.Left, shadow.Top )
 
-	bl.On("mouse-drag", func(mouseDragEvent interface{}) {
+	mouse_drag.On( func(mouseDragEvent interface{}) {
 		e := mouseDragEvent.(mouse_drag.Event)
 
 		shadow, _ := bl.GetShadowById(e.Target.Id)

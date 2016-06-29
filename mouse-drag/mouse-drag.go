@@ -1,15 +1,12 @@
-package focus
+package mouse_drag
 
-import (
-	"github.com/amortaza/go-bellina"
-)
+import "github.com/amortaza/go-bellina"
 
 type Event struct {
-	ClickedNodeId string
-	LoseFocusNodeId string
-	IsGainFocusEvent bool
-	IsKeyEvent bool
-	KeyEvent *bl.KeyEvent
+	X, Y int32
+	Target *bl.Node
+	StartX, StartY int32
+	MouseOffsetX, MouseOffsetY int32
 }
 
 func On(cb func(interface{})) {

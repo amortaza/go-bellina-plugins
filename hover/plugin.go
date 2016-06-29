@@ -1,25 +1,24 @@
-package mouse_hover
+package hover
 
 import (
-	"github.com/amortaza/go-bellina/event"
 	"github.com/amortaza/go-adt"
+	"github.com/amortaza/go-bellina/event"
 	"github.com/amortaza/go-bellina"
 )
 
-var g_callbacksByNodeID *adt.CallbacksByID
-var lastNodeID string
-
-type Event struct {
-	InNodeID string
-	OutNodeID string
-	IsInEvent bool
-}
+var plugin *Plugin
 
 type Plugin struct {
 }
 
 func (c *Plugin) Name() string {
 	return "hover"
+}
+
+func NewPlugin() *Plugin {
+	plugin = &Plugin{}
+
+	return plugin
 }
 
 func (c *Plugin) GetState() interface{} {
@@ -39,12 +38,12 @@ func (c *Plugin) Init() {
 			inID, outID := currentNode.Id, lastNodeID
 
 			if g_callbacksByNodeID.HasId(inID) {
-				eIn := NewEvent(inID, outID, true)
+				eIn := newEvent(inID, outID, true)
 				g_callbacksByNodeID.CallAll(inID, eIn)
 			}
 
 			if g_callbacksByNodeID.HasId(outID) {
-				eOut := NewEvent(outID, inID, false)
+				eOut := newEvent(outID, inID, false)
 				g_callbacksByNodeID.CallAll(outID, eOut)
 			}
 
@@ -73,14 +72,3 @@ func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(int
 	panic("On2 not supoorted in mouse_hover.Plugin")
 }
 
-func NewEvent(inNodeID, outNodeID string, isInEvent bool) *Event {
-	c := &Event{inNodeID, outNodeID, isInEvent}
-
-	return c
-}
-
-func NewPlugin() *Plugin {
-	c := &Plugin{}
-
-	return c
-}

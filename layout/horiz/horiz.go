@@ -4,15 +4,20 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-var Param_Percent = "percent"
-
 type State struct {
-	//anchorFlags uint32
 }
 
-//func (s *State) AnchorBottom() {
-//	s.anchorFlags |= Z_ANCHOR_BOTTOM
-//}
+func SetSpacing(spacing int32) {
+	bl.SetI( "horiz", "spacing", spacing )
+}
+
+func SetPercent(percent int32) {
+	bl.SetI( "horiz", "percent", percent )
+}
+
+func FillRemaining() {
+	bl.SetI( "horiz", "percent", -1 )
+}
 
 var g_stateByNodeId map[string] *State
 
@@ -38,6 +43,8 @@ func (c *Plugin) Tick() {
 func runLogic(shadow *bl.ShadowNode, state *State) {
 	node := bl.GetNodeByID(shadow.Id)
 
+	spacing := bl.GetI_fromNodeID( shadow.Id, "horiz", "spacing" )
+
 	var x int32 = 0
 	var kidShadow *bl.ShadowNode
 	var pct int32
@@ -56,7 +63,7 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 			kidShadow.Width = parentW * pct / 100
 		}
 
-		x += kidShadow.Width
+		x += kidShadow.Width + spacing
 	}
 
 	if pct == -1 {
