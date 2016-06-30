@@ -47,7 +47,7 @@ func (c *Plugin) Init() {
 
 		e := mouseMoveEvent.(*bl.MouseMoveEvent)
 
-		node := bl.GetNodeByID( lastNodeID )
+		node := bl.GetNodeById( lastNodeID )
 
 		e.Target = node
 

@@ -47,7 +47,7 @@ func (c *Plugin) Tick() {
 	for e := g_states.Front(); e != nil; e = e.Next() {
 	        state := e.Value.(*AnimState)
 
-		shadow := bl.EnsureShadowByID(state.NodeId)
+		shadow := bl.EnsureShadowById(state.NodeId)
 		value, valid := state.InterpolFunc()
 
 		if valid {

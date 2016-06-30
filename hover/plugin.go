@@ -26,30 +26,34 @@ func (c *Plugin) GetState() interface{} {
 }
 
 func (c *Plugin) Init() {
-	g_callbacksByNodeID = adt.NewCallbacksByID()
+	callbacksByNodeId = adt.NewCallbacksByID()
 
 	event.RegisterLongTerm( bl.EventType_Mouse_Move, func(e event.Event) {
 		event := e.(*bl.MouseMoveEvent)
 
-		currentNode := event.Target
+		curId := event.Target.Id
 
-		if lastNodeID != currentNode.Id {
+		if lastNodeId != curId {
 
-			inID, outID := currentNode.Id, lastNodeID
-
-			if g_callbacksByNodeID.HasId(inID) {
-				eIn := newEvent(inID, outID, true)
-				g_callbacksByNodeID.CallAll(inID, eIn)
+			inId, outId := curId, lastNodeId
+			
+			if callbacksByNodeId.HasId(inId) {
+				eIn := newEvent(inId, outId, true)
+				callbacksByNodeId.CallAll(inId, eIn)
 			}
 
-			if g_callbacksByNodeID.HasId(outID) {
-				eOut := newEvent(outID, inID, false)
-				g_callbacksByNodeID.CallAll(outID, eOut)
+			if callbacksByNodeId.HasId(outId) {
+				eOut := newEvent(inId, outId, false)
+				callbacksByNodeId.CallAll(outId, eOut)
 			}
 
-			lastNodeID = currentNode.Id
+			lastNodeId = curId
 		}
 	})
+}
+
+func (c *Plugin) Reset() {
+	callbacksByNodeId.ClearAll()
 }
 
 func (c *Plugin) Tick() {

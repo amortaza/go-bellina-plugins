@@ -57,7 +57,7 @@ func (c *Plugin) On(cb func(interface{})) {
 	bl.Current_Node.Kids.Init()
 
 	for _, nodectx := range lst {
-		node := bl.GetNodeByID(nodectx.id)
+		node := bl.GetNodeById(nodectx.id)
 
 		bl.Current_Node.Kids.PushBack(node)
 

@@ -2,17 +2,17 @@ package hover
 
 import "github.com/amortaza/go-adt"
 
-var g_callbacksByNodeID *adt.CallbacksByID
-var lastNodeID string
+var callbacksByNodeId *adt.CallbacksByID
+var lastNodeId string
 
 type Event struct {
-	InNodeID string
-	OutNodeID string
+	InNodeId  string
+	OutNodeId string
 	IsInEvent bool
 }
 
-func newEvent(inNodeID, outNodeID string, isInEvent bool) *Event {
-	c := &Event{inNodeID, outNodeID, isInEvent}
+func newEvent(inNodeId, outNodeId string, isInEvent bool) *Event {
+	c := &Event{inNodeId, outNodeId, isInEvent}
 
 	return c
 }
