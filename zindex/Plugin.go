@@ -2,10 +2,11 @@ package zindex
 
 import (
 	"github.com/amortaza/go-bellina"
+	"fmt"
 )
 
-type Event struct {
-}
+var plugin *Plugin
+
 
 type Plugin struct {
 }
@@ -39,11 +40,12 @@ func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
-	panic("On2 not supoorted in click.Plugin")
+	fmt.Println("On2 not supoorted in zindex plugin")
 }
 
 func NewPlugin() *Plugin {
-	c := &Plugin{}
+	plugin = &Plugin{}
 
-	return c
+	return plugin
 }
+
