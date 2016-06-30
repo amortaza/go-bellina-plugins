@@ -26,6 +26,9 @@ func (c *Plugin) GetState() interface{} {
 func (c *Plugin) Tick() {
 }
 
+func (c *Plugin) Reset() {
+}
+
 func (c *Plugin) OnNodeAdded(node *bl.Node) {
 }
 

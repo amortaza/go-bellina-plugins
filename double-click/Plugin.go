@@ -39,6 +39,9 @@ func (c *Plugin) Init() {
 	bl.Plugin( click.NewPlugin() )
 }
 
+func (c *Plugin) Reset() {
+}
+
 func (c *Plugin) Uninit() {
 }
 

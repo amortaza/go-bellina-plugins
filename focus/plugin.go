@@ -24,6 +24,9 @@ func (c *Plugin) Uninit() {
 func (c *Plugin) Tick() {
 }
 
+func (c *Plugin) Reset() {
+}
+
 func (e *Event) Type() string {
 	return "focus"
 }

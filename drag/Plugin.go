@@ -32,6 +32,9 @@ func (c *Plugin) OnNodeRemoved(node *bl.Node) {
 func (c *Plugin) Tick() {
 }
 
+func (c *Plugin) Reset() {
+}
+
 func (c *Plugin) Uninit() {
 }
 
