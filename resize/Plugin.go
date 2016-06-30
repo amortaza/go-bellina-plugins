@@ -61,7 +61,7 @@ func (c *Plugin) On(cb func(interface{})) {
 
 			e := mouseDragEvent.(mouse_drag.Event)
 
-			shadow, _ := bl.GetShadowById(e.Target.Id)
+			shadow := bl.EnsureShadowById(e.Target.Id)
 
 			diffX := e.X - e.StartX
 			diffY := e.Y - e.StartY
