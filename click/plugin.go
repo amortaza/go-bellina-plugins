@@ -46,6 +46,10 @@ func (c *Plugin) On(cb func(interface{})) {
 
 func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(interface{})) {
 
+	if plugin == nil {
+		panic("You did not load the click plugin")
+	}
+
 	event.RegisterShortTerm(bl.EventType_Mouse_Button, func(event event.Event) {
 
 		e := event.(*bl.MouseButtonEvent)

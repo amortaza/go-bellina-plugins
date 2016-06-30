@@ -25,6 +25,11 @@ func (a ByOrder) Swap(i,j int) {a[i],a[j]=a[j],a[i]}
 func (a ByOrder) Less(i,j int) bool {return a[i].order < a[j].order}
 
 func (c *Plugin) On(cb func(interface{})) {
+
+	if c == nil {
+		panic("You did not load zindex plugin")
+	}
+
 	ctx, ok := g_ctxByNodeId[bl.Current_Node.Id]
 
 	if !ok {

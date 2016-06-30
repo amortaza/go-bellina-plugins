@@ -104,6 +104,10 @@ func (p *Plugin) On2(	onKey func(interface{}),
 			onGainFocus func(interface{}),
 			onLoseFocus func(interface{})) {
 
+	if plugin == nil {
+		panic("You did not load the focus plugin")
+	}
+
 	nodeId := bl.Current_Node.Id
 
 	click.On( func(i interface{}) {

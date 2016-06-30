@@ -69,10 +69,14 @@ func (c *Plugin) Uninit() {
 }
 
 func (c *Plugin) On(cb func(interface{})) {
-	g_callbacksByNodeID.Add(bl.Current_Node.Id, cb)
+	if c == nil {
+		panic("You did not load hover plugin")
+	}
+
+	callbacksByNodeId.Add(bl.Current_Node.Id, cb)
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
-	panic("On2 not supoorted in mouse_hover.Plugin")
+	panic("On2 not suported in hover.Plugin")
 }
 
