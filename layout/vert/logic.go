@@ -23,9 +23,9 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 
 	spacing := bl.GetI_fromNodeID( shadow.Id, "vert", "spacing" )
 
-	var y int32 = 0
+	var y = 0
 	var kidShadow *bl.ShadowNode
-	var pct int32
+	var pct int
 
 	parentH := shadow.Height
 

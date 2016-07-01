@@ -3,7 +3,7 @@ package drag
 import "github.com/amortaza/go-bellina"
 
 type Event struct {
-	X, Y int32
+	X, Y int
 	Target *bl.Node
 }
 

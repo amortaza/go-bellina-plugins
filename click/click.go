@@ -4,8 +4,13 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
+}
+
 type Event struct {
-	X, Y int32
+	X, Y int
 	Target *bl.Node
 }
 

@@ -4,14 +4,16 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-type State struct {
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
 }
 
-func SetSpacing(spacing int32) {
+func SetSpacing(spacing int) {
 	bl.SetI( "vert", "spacing", spacing )
 }
 
-func SetPercent(percent int32) {
+func SetPercent(percent int) {
 	bl.SetI( "vert", "percent", percent )
 }
 

@@ -9,8 +9,15 @@ import (
 var lastNodeID string
 var lastMs int64
 
+var plugin *Plugin
+
+func init() {
+	plugin = &Plugin{1000}
+	bl.Plugin(plugin)
+}
+
 type Event struct {
-	X, Y int32
+	X, Y int
 	Target *bl.Node
 }
 

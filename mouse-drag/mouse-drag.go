@@ -3,10 +3,10 @@ package mouse_drag
 import "github.com/amortaza/go-bellina"
 
 type Event struct {
-	X, Y int32
+	X, Y int
 	Target *bl.Node
-	StartX, StartY int32
-	MouseOffsetX, MouseOffsetY int32
+	StartX, StartY int
+	MouseOffsetX, MouseOffsetY int
 }
 
 func On(cb func(interface{})) {

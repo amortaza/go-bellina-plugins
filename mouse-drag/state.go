@@ -2,11 +2,11 @@ package mouse_drag
 
 import "github.com/amortaza/go-bellina"
 
-var lastNodeID string
-var startX, startY int32
-var mouseOffsetX, mouseOffsetY int32
+var gLastNodeId string
+var startX, startY int
+var mouseOffsetX, mouseOffsetY int
 
-func newEvent(mouseX, mouseY int32, target *bl.Node) Event {
+func newEvent(mouseX, mouseY int, target *bl.Node) Event {
 	return Event{
 		mouseX, mouseY,
 		target,

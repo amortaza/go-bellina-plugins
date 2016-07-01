@@ -7,7 +7,9 @@ import (
 	"container/list"
 )
 
-func StartPath(nodeId string, animId string, startValue, endValue float32, numSteps int32, interpolMethod string, cb func(shadow *bl.ShadowNode, value float32)) {
+var plugin *Plugin
+
+func StartPath(nodeId string, animId string, startValue, endValue float32, numSteps int, interpolMethod string, cb func(shadow *bl.ShadowNode, value float32)) {
 	state := &AnimState{NodeId: nodeId, AnimId: animId}
 	g_states.PushBack(state)
 
@@ -19,7 +21,7 @@ func StartPath(nodeId string, animId string, startValue, endValue float32, numSt
 
 	var curPct float32 = 0
 	var deltaPct float32 = 1.0 / float32(numSteps)
-	var remaining int32 = numSteps
+	remaining := numSteps
 
 	state.nextPct = func() (float32, bool) {
 

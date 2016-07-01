@@ -4,14 +4,18 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-type State struct {
+var plugin *Plugin
+
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
 }
 
-func SetSpacing(spacing int32) {
+func SetSpacing(spacing int) {
 	bl.SetI( "horiz", "spacing", spacing )
 }
 
-func SetPercent(percent int32) {
+func SetPercent(percent int) {
 	bl.SetI( "horiz", "percent", percent )
 }
 
@@ -45,9 +49,9 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 
 	spacing := bl.GetI_fromNodeID( shadow.Id, "horiz", "spacing" )
 
-	var x int32 = 0
+	var x = 0
 	var kidShadow *bl.ShadowNode
-	var pct int32
+	var pct int
 
 	parentW := shadow.Width
 

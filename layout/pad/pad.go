@@ -81,7 +81,7 @@ func (c *Plugin) On(cb func(interface{})) {
 	})
 }
 
-func SetPaddingAll(pad int32) {
+func SetPaddingAll(pad int) {
 	bl.SetI("pad", Param_Left, pad)
 	bl.SetI("pad", Param_Top, pad)
 	bl.SetI("pad", Param_Right, pad)
