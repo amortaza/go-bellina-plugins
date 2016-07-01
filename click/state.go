@@ -1,4 +1,5 @@
 package click
 
-var lastNodeID string
+var gLastNodeID string
+
 

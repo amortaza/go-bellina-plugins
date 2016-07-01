@@ -18,7 +18,7 @@ func ensureState(nodeId string) *State {
 
 func runLogic(shadow *bl.ShadowNode, state *State) {
 	ensureState(shadow.Id)
-	parentShadow := bl.EnsureShadowByID(shadow.ParentID)
+	parentShadow := bl.EnsureShadowById(shadow.ParentID)
 
 	if state.anchorFlags & Z_ANCHOR_RIGHT != 0 {
 		if state.anchorFlags & Z_ANCHOR_LEFT != 0 {

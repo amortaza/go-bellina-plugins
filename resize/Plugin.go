@@ -4,6 +4,7 @@ import (
 	"github.com/amortaza/go-bellina-plugins/mouse-drag"
 	"math"
 	"github.com/amortaza/go-bellina"
+	"fmt"
 )
 
 var plugin *Plugin
@@ -85,6 +86,10 @@ func (c *Plugin) On(cb func(interface{})) {
 		},
 
 		nil)
+
+	bl.EnsureShadow().Dim_to_Node()
+	
+	//fmt.Println(bl.Current_Node.Id, bl.Current_Node.Width)
 }
 
 func newEvent(target *bl.Node) Event {

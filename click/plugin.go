@@ -46,17 +46,13 @@ func (c *Plugin) On(cb func(interface{})) {
 
 func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(interface{})) {
 
-	if plugin == nil {
-		panic("You did not load the click plugin")
-	}
-
 	event.RegisterShortTerm(bl.EventType_Mouse_Button, func(event event.Event) {
 
 		e := event.(*bl.MouseButtonEvent)
 
 		if e.ButtonAction == xel.Button_Action_Down {
 
-			lastNodeID = e.Target.Id
+			gLastNodeID = e.Target.Id
 
 			if onDown != nil {
 				onDown(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
@@ -64,12 +60,12 @@ func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss
 
 		} else if e.ButtonAction == xel.Button_Action_Up {
 
-			if lastNodeID == e.Target.Id {
+			if gLastNodeID == e.Target.Id {
 				// we have a click!
 				cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 
 			} else {
-				lastNodeID = ""
+				gLastNodeID = ""
 
 				if onUpAndMiss != nil {
 					onUpAndMiss(nil)

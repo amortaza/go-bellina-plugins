@@ -38,19 +38,19 @@ func (c *Plugin) Init() {
 		e := mouseButtonEvent.(*bl.MouseButtonEvent)
 
 		if e.ButtonAction == xel.Button_Action_Up {
-			lastNodeID = ""
+			gLastNodeId = ""
 		}
 	})
 
 	event.RegisterLongTerm(bl.EventType_Mouse_Move, func(mouseMoveEvent event.Event) {
 
-		if lastNodeID == "" {
+		if gLastNodeId == "" {
 			return
 		}
 
 		e := mouseMoveEvent.(*bl.MouseMoveEvent)
 
-		node := bl.GetNodeById( lastNodeID )
+		node := bl.GetNodeById(gLastNodeId)
 
 		e.Target = node
 
@@ -69,7 +69,7 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
 		if e.ButtonAction == xel.Button_Action_Down {
-			lastNodeID = e.Target.Id
+			gLastNodeId = e.Target.Id
 			startX, startY = bl.Mouse_X, bl.Mouse_Y
 
 			absX, absY := bl.GetNodeAbsolutePos(e.Target)
@@ -81,7 +81,7 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 			}
 
 		} else if e.ButtonAction == xel.Button_Action_Up {
-			lastNodeID = ""
+			gLastNodeId = ""
 
 			if endCb != nil {
 				endCb(newEvent(bl.Mouse_X, bl.Mouse_Y, e.Target))
@@ -92,8 +92,9 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 	})
 
 	bl.OnMouseMove( func(e *bl.MouseMoveEvent) {
-		if lastNodeID == e.Target.Id {
-			// we have a click!
+		if gLastNodeId == e.Target.Id {
+			fmt.Println("Getting drag on " + gLastNodeId)
+			// we have a drag!
 			if cb != nil {
 				cb(newEvent(e.X, e.Y, e.Target))
 			}

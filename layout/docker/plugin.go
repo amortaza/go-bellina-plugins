@@ -19,7 +19,7 @@ func (c *Plugin) GetState() interface{} {
 
 func (c *Plugin) Tick() {
 	for key, state := range g_stateByNodeId {
-		shadow, _ := bl.GetShadowById(key)
+		shadow := bl.EnsureShadowById(key)
 
 		runLogic(shadow, state)
 	}
