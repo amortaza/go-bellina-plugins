@@ -3,9 +3,9 @@ package mouse_drag
 import "github.com/amortaza/go-bellina"
 
 type Event struct {
-	X, Y int
-	Target *bl.Node
-	StartX, StartY int
+	MouseX, MouseY             int
+	Target                     *bl.Node
+	StartX, StartY             int
 	MouseOffsetX, MouseOffsetY int
 }
 

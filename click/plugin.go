@@ -1,10 +1,7 @@
 package click
 
 import (
-	"github.com/amortaza/go-bellina/event"
 	"github.com/amortaza/go-bellina"
-	"github.com/amortaza/go-xel"
-	"fmt"
 )
 
 var NAME = "click"
@@ -45,36 +42,6 @@ func (c *Plugin) On(cb func(interface{})) {
 }
 
 func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(interface{})) {
-
-	event.RegisterShortTerm(bl.EventType_Mouse_Button, func(event event.Event) {
-
-		e := event.(*bl.MouseButtonEvent)
-
-		if e.ButtonAction == xel.Button_Action_Down {
-
-			gLastNodeID = e.Target.Id
-
-			if onDown != nil {
-				onDown(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
-			}
-
-		} else if e.ButtonAction == xel.Button_Action_Up {
-
-			if gLastNodeID == e.Target.Id {
-				// we have a click!
-				cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
-
-			} else {
-				gLastNodeID = ""
-
-				if onUpAndMiss != nil {
-					onUpAndMiss(nil)
-				}
-			}
-
-		} else {
-			fmt.Println("Button action not recognized in click.Plugin")
-		}
-	})
+	logic(cb, onDown, onUpAndMiss)
 }
 

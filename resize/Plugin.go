@@ -65,8 +65,8 @@ func (c *Plugin) On(cb func(interface{})) {
 
 			shadow := bl.EnsureShadowById(e.Target.Id)
 
-			diffX := e.X - e.StartX
-			diffY := e.Y - e.StartY
+			diffX := e.MouseX - e.StartX
+			diffY := e.MouseY - e.StartY
 
 			width := int(math.Max(float64(startWidth + diffX), 16))
 			height := int(math.Max(float64(startHeight + diffY), 16))
