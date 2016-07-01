@@ -9,7 +9,11 @@ var Param_Top = "top"
 var Param_Right = "right"
 var Param_Bottom = "bottom"
 
-type State struct {
+var plugin *Plugin
+
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
 }
 
 var g_stateByNodeId map[string] *State

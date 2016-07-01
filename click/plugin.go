@@ -82,8 +82,3 @@ func (c *Plugin) On2(cb func(interface{}), onDown func(interface{}), onUpAndMiss
 	})
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}

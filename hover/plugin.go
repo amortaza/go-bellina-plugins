@@ -15,12 +15,6 @@ func (c *Plugin) Name() string {
 	return "hover"
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
-
 func (c *Plugin) GetState() interface{} {
 	return nil
 }

@@ -49,13 +49,11 @@ func (c *Plugin) Init() {
 func (c *Plugin) Uninit() {
 }
 
+func (c *Plugin) Reset() {
+}
+
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {
 	panic("On2 not supported for docker plugin")
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
 

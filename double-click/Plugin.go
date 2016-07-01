@@ -43,7 +43,6 @@ func (c *Plugin) OnNodeRemoved(node *bl.Node) {
 }
 
 func (c *Plugin) Init() {
-	bl.Plugin( click.NewPlugin() )
 }
 
 func (c *Plugin) Reset() {
@@ -83,12 +82,3 @@ func (c *Plugin) On(cb func(interface{})) {
 	})
 }
 
-func NewPlugin(speedMs int64) *Plugin {
-	if speedMs == 0 {
-		speedMs = 1000
-	}
-
-	c := &Plugin{speedMs}
-
-	return c
-}

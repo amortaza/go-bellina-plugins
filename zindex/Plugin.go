@@ -43,9 +43,4 @@ func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(int
 	fmt.Println("On2 not supoorted in zindex plugin")
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
 

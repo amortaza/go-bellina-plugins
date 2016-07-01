@@ -14,12 +14,6 @@ func (c *Plugin) OnNodeRemoved(node *bl.Node) {
 func (c *Plugin) Uninit() {
 }
 
-func NewPlugin() *Plugin {
-	c := &Plugin{}
-
-	return c
-}
-
 func (c *Plugin) On(cb func(interface{})) {
 	c.On2(cb, nil, nil)
 }

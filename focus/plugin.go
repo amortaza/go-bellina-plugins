@@ -12,12 +12,6 @@ var plugin *Plugin
 type Plugin struct {
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
-
 func (c *Plugin) Uninit() {
 }
 
@@ -53,8 +47,6 @@ func (p *Plugin) Init() {
 	g_onKeyByNodeId = make(map[string] func(interface{}))
 	g_onLoseFocusByNodeId = make(map[string] func(interface{}))
 	g_onGainFocusByNodeId = make(map[string] func(interface{}))
-
-	bl.Plugin( click.NewPlugin() )
 
 	event.RegisterLongTerm(bl.EventType_Key, func(e event.Event) {
 		if lastNodeId == "" {

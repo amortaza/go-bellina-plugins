@@ -74,3 +74,8 @@ func Linear(state *AnimState) (func() (float32, bool)) {
 		return state.StartValue + state.diff * pct, valid
 	}
 }
+
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
+}

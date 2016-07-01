@@ -36,3 +36,8 @@ func AnchorLeft() {
 func Use() {
 	plugin.On(nil)
 }
+
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
+}

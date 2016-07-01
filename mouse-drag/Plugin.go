@@ -101,9 +101,4 @@ func (c *Plugin) On2(cb func(interface{}), startCb func(interface{}), endCb func
 	})
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
 

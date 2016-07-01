@@ -1,5 +1,10 @@
 package zindex
 
-type Event struct {
+import "github.com/amortaza/go-bellina"
+
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
 }
+
 

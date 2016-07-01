@@ -16,7 +16,6 @@ func (c *Plugin) Name() string {
 }
 
 func (c *Plugin) Init() {
-	bl.Plugin( mouse_drag.NewPlugin() )
 }
 
 func (c *Plugin) GetState() interface{} {
@@ -66,9 +65,4 @@ func (c *Plugin) On(cb func(interface{})) {
 	})
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
 

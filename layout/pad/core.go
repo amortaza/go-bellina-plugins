@@ -28,9 +28,4 @@ func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(int
 	panic("On2 not supported for pad plugin")
 }
 
-func NewPlugin() *Plugin {
-	c := &Plugin{}
-
-	return c
-}
 

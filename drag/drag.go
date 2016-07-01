@@ -11,3 +11,8 @@ func On(cb func(interface{})) {
 	plugin.On(cb)
 }
 
+func init() {
+	plugin = &Plugin{}
+	bl.Plugin(plugin)
+}
+

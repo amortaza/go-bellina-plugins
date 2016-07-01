@@ -28,12 +28,6 @@ func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(int
 	panic("On2 not supported for vert plugin")
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
-
 func (c *Plugin) GetState() interface{} {
 	return ensureState(bl.Current_Node.Id)
 }

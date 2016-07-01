@@ -93,8 +93,3 @@ func newEvent(target *bl.Node) Event {
 	}
 }
 
-func NewPlugin() *Plugin {
-	plugin = &Plugin{}
-
-	return plugin
-}
