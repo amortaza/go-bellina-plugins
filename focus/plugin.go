@@ -29,10 +29,6 @@ func (p *Plugin) Name() string {
 	return "focus"
 }
 
-func (c *Plugin) GetState() interface{} {
-	return nil
-}
-
 func (c *Plugin) OnNodeAdded(node *bl.Node) {
 }
 

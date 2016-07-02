@@ -15,10 +15,6 @@ func (c *Plugin) Name() string {
 	return "hover"
 }
 
-func (c *Plugin) GetState() interface{} {
-	return nil
-}
-
 func (c *Plugin) Init() {
 	callbacksByNodeId = adt.NewCallbacksByID()
 

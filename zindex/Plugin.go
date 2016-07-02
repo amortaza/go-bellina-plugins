@@ -15,10 +15,6 @@ func (c *Plugin) Name() string {
 	return "zindex"
 }
 
-func (c *Plugin) GetState() interface{} {
-	return nil
-}
-
 func (c *Plugin) Init() {
 	g_ctxByNodeId = make(map[string] *Ctx)
 }
