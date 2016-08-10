@@ -1,9 +1,9 @@
 package vert
 
 import (
-	"github.com/amortaza/go-bellina"
+	//"github.com/amortaza/go-bellina"
 )
-
+/*
 var g_stateByNodeId map[string] *State
 
 func ensureState(nodeId string) *State {
@@ -48,3 +48,4 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 		kidShadow.Height = parentH - kidShadow.Top - 1
 	}
 }
+*/

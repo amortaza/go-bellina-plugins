@@ -18,7 +18,7 @@ func (c *Plugin) OnNodeRemoved(node *bl.Node) {
 }
 
 func (c *Plugin) Init() {
-	g_stateByNodeId = make(map[string] *State)
+	//g_stateByNodeId = make(map[string] *State)
 }
 
 func (c *Plugin) Uninit() {
@@ -29,14 +29,15 @@ func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(int
 }
 
 func (c *Plugin) GetState() interface{} {
-	return ensureState(bl.Current_Node.Id)
+	//return ensureState(bl.Current_Node.Id)
+	return nil
 }
 
 func (c *Plugin) Tick() {
 }
 
 func (c *Plugin) On(cb func(interface{})) {
-	state := ensureState(bl.Current_Node.Id)
+	/*state := ensureState(bl.Current_Node.Id)
 	shadow := bl.EnsureShadow()
 
 	for e := bl.Current_Node.Kids.Front(); e != nil; e = e.Next() {
@@ -49,7 +50,7 @@ func (c *Plugin) On(cb func(interface{})) {
 
 	bl.AddPluginOnTick(func() {
 		runLogic(shadow, state)
-	})
+	})*/
 }
 
 
