@@ -26,7 +26,7 @@ func logic(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(inte
 			gLastNodeId = e.Target.Id
 
 			if onDown != nil {
-				onDown(Event{bl.Mouse_X_Scaled, bl.Mouse_X_Scaled, e.Target})
+				onDown(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 			}
 
 		} else if e.ButtonAction == xel.Button_Action_Up {
@@ -34,8 +34,8 @@ func logic(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(inte
 			if gLastNodeId == e.Target.Id {
 				// we have a click!
 
-				if cb != nil {
-					cb(Event{bl.Mouse_X_Scaled, bl.Mouse_X_Scaled, e.Target})
+				if cb != nil && gLastNodeId == nodeId {
+					cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 				}
 
 			} else if gLastNodeId == nodeId {
