@@ -1,7 +1,6 @@
 package click
 
 import (
-	"github.com/amortaza/go-bellina/event"
 	"github.com/amortaza/go-bellina"
 	"fmt"
 	"github.com/amortaza/go-xel2"
@@ -13,7 +12,7 @@ func logic(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(inte
 
 	nodeId := bl.Current_Node.Id
 
-	event.RegisterShortTerm(bl.EventType_Mouse_Button, func(event event.Event) {
+	bl.RegisterShortTerm(bl.EventType_Mouse_Button, func(event bl.Event) {
 
 		e := event.(*bl.MouseButtonEvent)
 
