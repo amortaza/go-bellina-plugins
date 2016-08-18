@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/amortaza/go-bellina/event"
 	"github.com/amortaza/go-bellina"
+	"github.com/amortaza/go-xel2"
 )
 
 var plugin *Plugin
@@ -19,7 +20,7 @@ func (c *Plugin) Name() string {
 func (c *Plugin) Tick() {
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 	gEndCbByNodeId = make(map[string] func(interface{}))
 }
 

@@ -49,7 +49,7 @@ func (c *Plugin) Init() {
 func (c *Plugin) Uninit() {
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 }
 
 func (c *Plugin) On2(cb func(interface{}), start func(interface{}), end func(interface{})) {

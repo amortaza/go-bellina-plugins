@@ -32,7 +32,7 @@ func (c *Plugin) Init() {
 	g_states = list.New()
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 }
 
 

@@ -27,7 +27,7 @@ func (c *Plugin) OnNodeRemoved(node *bl.Node) {
 func (c *Plugin) Tick() {
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 }
 
 func (c *Plugin) Uninit() {

@@ -42,7 +42,7 @@ func (c *Plugin) Init() {
 	})
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 	callbacksByNodeId.ClearAll()
 }
 

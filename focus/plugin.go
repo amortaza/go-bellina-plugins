@@ -5,6 +5,7 @@ import (
 	"github.com/amortaza/go-bellina-plugins/click"
 	"github.com/amortaza/go-bellina/event"
 	"github.com/amortaza/go-xel"
+	"github.com/amortaza/go-xel2"
 )
 
 var plugin *Plugin
@@ -18,7 +19,7 @@ func (c *Plugin) Uninit() {
 func (c *Plugin) Tick() {
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 }
 
 func (e *Event) Type() string {

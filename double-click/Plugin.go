@@ -41,7 +41,7 @@ func (c *Plugin) OnNodeRemoved(node *bl.Node) {
 func (c *Plugin) Init() {
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 }
 
 func (c *Plugin) Uninit() {

@@ -22,7 +22,7 @@ func (c *Plugin) Init() {
 func (c *Plugin) Tick() {
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 }
 
 func (c *Plugin) OnNodeAdded(node *bl.Node) {

@@ -23,7 +23,7 @@ func (c *Plugin) Name() string {
 func (c *Plugin) Tick() {
 }
 
-func (c *Plugin) Reset() {
+func (c *Plugin) Reset_ShortTerm() {
 }
 
 func (c *Plugin) OnNodeAdded(node *bl.Node) {
@@ -67,7 +67,7 @@ func (c *Plugin) On(cb func(interface{})) {
 			width := int(math.Max(float64(startWidth + diffX), 16))
 			height := int(math.Max(float64(startHeight + diffY), 16))
 
-			shadow.Dim(width, height)
+			shadow.Dim__Self_and_Node(width, height)
 
 			if cb != nil {
 				cb(newEvent(e.Target))
@@ -83,7 +83,7 @@ func (c *Plugin) On(cb func(interface{})) {
 
 		nil)
 
-	bl.EnsureShadow().Dim_to_Node()
+	bl.EnsureShadow().Dim__Node_Only()
 	
 	//fmt.Println(bl.Current_Node.Id, bl.Current_Node.Width)
 }
