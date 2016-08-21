@@ -1,27 +1,11 @@
 package vert
 
-import (
-	//"github.com/amortaza/go-bellina"
-)
-/*
-var g_stateByNodeId map[string] *State
-
-func ensureState(nodeId string) *State {
-	state, ok := g_stateByNodeId[nodeId]
-
-	if !ok {
-		state = &State{}
-
-		g_stateByNodeId[nodeId] = state
-	}
-
-	return state
-}
+import "github.com/amortaza/go-bellina"
 
 func runLogic(shadow *bl.ShadowNode, state *State) {
-	node := bl.GetNodeByID(shadow.Id)
+	node := bl.GetNodeById(shadow.Id)
 
-	spacing := bl.GetI_fromNodeID( shadow.Id, "vert", "spacing" )
+	spacing := state.Spacing_
 
 	var y = 0
 	var kidShadow *bl.ShadowNode
@@ -31,11 +15,11 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
 		kid := e.Value.(*bl.Node)
-		kidShadow = bl.EnsureShadowByID(kid.Id)
+		kidShadow = bl.EnsureShadowById(kid.Id)
 
 		kidShadow.Top = y
 
-		pct = bl.GetI_fromNodeID(kid.Id, "vert", "percent")
+		pct = -1 //bl.GetI_fromNodeID(kid.Id, "vert", "percent")
 
 		if pct > 0 {
 			kidShadow.Height = parentH * pct / 100
@@ -48,4 +32,3 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 		kidShadow.Height = parentH - kidShadow.Top - 1
 	}
 }
-*/

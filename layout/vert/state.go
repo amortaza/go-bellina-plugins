@@ -1,0 +1,40 @@
+package vert
+
+type State struct {
+	VertId          string
+	Spacing_	int
+	Percent_	int
+}
+
+var g_stateById  map[string] *State
+
+func ensureState(vertId string) *State {
+	state, ok := g_stateById[vertId]
+
+	if !ok {
+		state = &State{VertId: vertId}
+
+		g_stateById[vertId] = state
+	}
+
+	return state
+}
+
+func (s *State) Spacing(spacing int) (*State){
+	s.Spacing_ = spacing
+
+	return s
+}
+
+func (s *State) Percent(percent int) (*State){
+	s.Percent_ = percent
+
+	return s
+}
+
+func (s *State) Use() (*State){
+	Use()
+
+	return s
+}
+

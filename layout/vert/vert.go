@@ -1,26 +1,43 @@
 package vert
 
 import (
-//	"github.com/amortaza/go-bellina"
+	"github.com/amortaza/go-bellina"
 )
 
+// Shared variable across Div()/End()
+var g_curState *State
+
 func init() {
-	plugin = &Plugin{}
-//	bl.Plugin(plugin)
-}
-/*
-func SetSpacing(spacing int) {
-	bl.SetI( "vert", "spacing", spacing )
+	g_stateById = make(map[string] *State)
 }
 
-func SetPercent(percent int) {
-	bl.SetI( "vert", "percent", percent )
+func Id(postfixVertId string) *State {
+	vertId := bl.Current_Node.Id + "/" + postfixVertId
+
+	g_curState = ensureState(vertId)
+
+	return g_curState
 }
 
-func FillRemaining() {
-	bl.SetI( "vert", "percent", -1 )
-}
-*/
 func Use() {
-	plugin.On(nil)
+
+	shadow := bl.EnsureShadow()
+
+	kids := bl.Current_Node.Kids
+
+	for e := kids.Front(); e != nil; e = e.Next() {
+	        kid := e.Value.(*bl.Node)
+
+		kidShadow := bl.EnsureShadowById(kid.Id)
+
+		kidShadow.DimWidth__Node_Only()
+		kidShadow.DimHeight__Node_Only()
+
+		kidShadow.PosLeft__Node_Only()
+		kidShadow.PosTop__Node_Only()
+	}
+
+	bl.RegisterShortTerm_LifeCycleTick(func() {
+		runLogic(shadow, g_curState)
+	})
 }
