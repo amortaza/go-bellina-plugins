@@ -7,7 +7,7 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 
 	spacing := state.Spacing_
 
-	var y = 0
+	var y = state.Top_
 	var kidShadow *bl.ShadowNode
 	var pct int
 

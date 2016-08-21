@@ -30,14 +30,10 @@ func Use() {
 
 		kidShadow := bl.EnsureShadowById(kid.Id)
 
-		kidShadow.DimWidth__Node_Only()
-		kidShadow.DimHeight__Node_Only()
-
-		kidShadow.PosLeft__Node_Only()
 		kidShadow.PosTop__Node_Only()
 	}
 
-	bl.RegisterShortTerm_LifeCycleTick(func() {
+	bl.Register_LifeCycle_ShortTerm_Tick(func() {
 		runLogic(shadow, g_curState)
 	})
 }

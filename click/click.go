@@ -4,21 +4,18 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-func init() {
-	plugin = &Plugin{}
-	bl.Plugin(plugin)
-}
-
 type Event struct {
 	X, Y int
 	Target *bl.Node
 }
 
+// click.On( func )
 func On(cb func(interface{})) {
-	plugin.On(cb)
+	logic(cb, nil, nil)
 }
 
-func On2(cb func(interface{}), startCb func(interface{}), endCb func(interface{})) {
-	plugin.On2(cb, startCb, endCb)
+// click.On_WithLifeCycle( func )
+func On_WithLifeCycle(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(interface{})) {
+	logic(cb, onDown, onUpAndMiss)
 }
 

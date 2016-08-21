@@ -2,6 +2,8 @@ package vert
 
 type State struct {
 	VertId          string
+
+	Top_     	int
 	Spacing_	int
 	Percent_	int
 }
@@ -26,13 +28,19 @@ func (s *State) Spacing(spacing int) (*State){
 	return s
 }
 
+func (s *State) Top(top int) (*State){
+	s.Top_ = top
+
+	return s
+}
+
 func (s *State) Percent(percent int) (*State){
 	s.Percent_ = percent
 
 	return s
 }
 
-func (s *State) Use() (*State){
+func (s *State) End() (*State){
 	Use()
 
 	return s
