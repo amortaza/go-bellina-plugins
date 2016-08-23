@@ -33,7 +33,7 @@ func Use() {
 		kidShadow.PosTop__Node_Only()
 	}
 
-	bl.Register_LifeCycle_ShortTerm_Tick(func() {
+	bl.Register_LifeCycle_AfterUser_Tick_ShortTerm(func() {
 		runLogic(shadow, g_curState)
 	})
 }
