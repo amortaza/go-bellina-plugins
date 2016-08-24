@@ -6,9 +6,12 @@ import (
 )
 
 type AnimState struct {
+
 	Tick func(*bl.ShadowNode, float32)
+
 	NodeId string
 	AnimId string
+
 	StartValue float32
 	EndValue float32
 
