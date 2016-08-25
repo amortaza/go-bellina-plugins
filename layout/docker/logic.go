@@ -20,27 +20,27 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 	ensureState(shadow.Id)
 	parentShadow := bl.EnsureShadowById(shadow.ParentId)
 
-	if state.anchorFlags & Z_ANCHOR_RIGHT != 0 {
-		if state.anchorFlags & Z_ANCHOR_LEFT != 0 {
+	if state.anchorFlags & _ANCHOR_RIGHT != 0 {
+		if state.anchorFlags & _ANCHOR_LEFT != 0 {
 			shadow.Left = 0;
 			shadow.Width = parentShadow.Width
 
 		} else {
 			shadow.Left = parentShadow.Width - shadow.Width
 		}
-	} else if state.anchorFlags & Z_ANCHOR_LEFT != 0 {
+	} else if state.anchorFlags & _ANCHOR_LEFT != 0 {
 		shadow.Left = 0;
 	}
 
-	if state.anchorFlags & Z_ANCHOR_BOTTOM != 0 {
-		if state.anchorFlags & Z_ANCHOR_TOP != 0 {
+	if state.anchorFlags & _ANCHOR_BOTTOM != 0 {
+		if state.anchorFlags & _ANCHOR_TOP != 0 {
 			shadow.Top = 0;
 			shadow.Height = parentShadow.Height
 
 		} else {
 			shadow.Top = parentShadow.Height - shadow.Height
 		}
-	} else if state.anchorFlags & Z_ANCHOR_TOP != 0 {
+	} else if state.anchorFlags & _ANCHOR_TOP != 0 {
 		shadow.Top = 0;
 	}
 }

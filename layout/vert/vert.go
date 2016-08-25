@@ -11,10 +11,8 @@ func init() {
 	g_stateById = make(map[string] *State)
 }
 
-func Id(postfixVertId string) *State {
-	vertId := bl.Current_Node.Id + "/" + postfixVertId
-
-	g_curState = ensureState(vertId)
+func Id() *State {
+	g_curState = ensureState(bl.Current_Node.Id)
 
 	return g_curState
 }

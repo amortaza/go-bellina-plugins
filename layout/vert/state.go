@@ -1,8 +1,6 @@
 package vert
 
 type State struct {
-	VertId          string
-
 	Top_     	int
 	Spacing_	int
 	Percent_	int
@@ -10,13 +8,13 @@ type State struct {
 
 var g_stateById  map[string] *State
 
-func ensureState(vertId string) *State {
-	state, ok := g_stateById[vertId]
+func ensureState(nodeId string) *State {
+	state, ok := g_stateById[nodeId]
 
 	if !ok {
-		state = &State{VertId: vertId}
+		state = &State{}
 
-		g_stateById[vertId] = state
+		g_stateById[nodeId] = state
 	}
 
 	return state
