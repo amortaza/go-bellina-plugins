@@ -2,8 +2,8 @@ package hover
 
 import "github.com/amortaza/go-adt"
 
-var callbacksByNodeId *adt.CallbacksByID
-var lastNodeId string
+var g_callbacksByNodeId *adt.CallbacksByID
+var g_lastNodeId string
 
 type Event struct {
 	InNodeId  string
