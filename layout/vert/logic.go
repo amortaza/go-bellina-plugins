@@ -9,9 +9,6 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 
 	var y = state.Top_
 	var kidShadow *bl.ShadowNode
-	var pct int
-
-	parentH := shadow.Height
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
 		kid := e.Value.(*bl.Node)
@@ -19,16 +16,6 @@ func runLogic(shadow *bl.ShadowNode, state *State) {
 
 		kidShadow.Top = y
 
-		pct = -1 //bl.GetI_fromNodeID(kid.Id, "vert", "percent")
-
-		if pct > 0 {
-			kidShadow.Height = parentH * pct / 100
-		}
-
 		y += kidShadow.Height + spacing
-	}
-
-	if pct == -1 {
-		kidShadow.Height = parentH - kidShadow.Top - 1
 	}
 }
