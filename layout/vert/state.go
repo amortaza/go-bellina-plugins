@@ -1,9 +1,10 @@
 package vert
 
+import "github.com/amortaza/go-bellina"
+
 type State struct {
-	Top_     	int
-	Spacing_	int
-	Percent_	int
+	Z_Top     int
+	Z_Spacing int
 }
 
 var g_stateById  map[string] *State
@@ -21,26 +22,22 @@ func ensureState(nodeId string) *State {
 }
 
 func (s *State) Spacing(spacing int) (*State){
-	s.Spacing_ = spacing
+	s.Z_Spacing = spacing
 
 	return s
 }
 
 func (s *State) Top(top int) (*State){
-	s.Top_ = top
+	s.Z_Top = top
 
 	return s
 }
 
-func (s *State) Percent(percent int) (*State){
-	s.Percent_ = percent
+func (s *State) End() {
+	node := bl.Current_Node
 
-	return s
-}
-
-func (s *State) End() (*State){
-	Use()
-
-	return s
+	bl.AddFunc(func() {
+		runLogic(node, s)
+	})
 }
 

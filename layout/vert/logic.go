@@ -2,20 +2,18 @@ package vert
 
 import "github.com/amortaza/go-bellina"
 
-func runLogic(shadow *bl.ShadowNode, state *State) {
-	node := bl.GetNodeById(shadow.Id)
+func runLogic(node *bl.Node, state *State) {
 
-	spacing := state.Spacing_
+	spacing := state.Z_Spacing
 
-	var y = state.Top_
-	var kidShadow *bl.ShadowNode
+	var y = state.Z_Top
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
+
 		kid := e.Value.(*bl.Node)
-		kidShadow = bl.EnsureShadowById(kid.Id)
 
-		kidShadow.Top = y
+		kid.Top = y
 
-		y += kidShadow.Height + spacing
+		y += kid.Height + spacing
 	}
 }
