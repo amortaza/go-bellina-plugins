@@ -28,15 +28,8 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 
 	left, top, width, height = node.Left, node.Top, node.Width, node.Height
 
-	// to do
-	//fmt.Println("(1 docker.runLogic) Parent Width ", parentNode.Id, " : ", parentNode.Width)
-
 	if state.anchorFlags & _ANCHOR_RIGHT != 0 {
 		if state.anchorFlags & _ANCHOR_LEFT != 0 {
-			
-			//fmt.Println("here", )
-			//bl.Disp(parentNode)
-
 			left = 0;
 			width = parentNode.Width
 

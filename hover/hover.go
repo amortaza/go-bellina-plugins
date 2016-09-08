@@ -9,7 +9,6 @@ import (
 func On(cb func(interface{})) {
 
 	g_callbacksByNodeId.Add(bl.Current_Node.Id, cb)
-
 }
 
 func init() {

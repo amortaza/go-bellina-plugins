@@ -7,8 +7,7 @@ import (
 	"github.com/amortaza/go-hal-oob"
 	"github.com/amortaza/go-dark-ux"
 	"github.com/amortaza/go-dark-ux/border"
-	"github.com/amortaza/go-bellina-plugins/click"
-	"github.com/amortaza/go-bellina-plugins/animation"
+	"github.com/amortaza/go-bellina-plugins/resize"
 )
 
 func initialize() {
@@ -30,24 +29,7 @@ func tick() {
 
 			border.Draw()
 
-			click.On(func(e interface{}) {
-				animation.StartPath("red", "hi", 0, 400, 200, func(shadow *bl.ShadowNode, value float32) {
-					shadow.Left__Self_and_Node(int(value), "animation")
-				})
-			})
-
-			shadow := bl.EnsureShadow()
-			shadow.Left__Node_Only("animation")
-		}
-		bl.End()
-
-		bl.Div()
-		{
-			bl.Id("green")
-			bl.Pos(100,100)
-			bl.Dim(100,100)
-
-			border.Draw()
+			resize.Use()
 		}
 		bl.End()
 	}

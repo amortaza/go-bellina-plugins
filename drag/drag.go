@@ -17,12 +17,10 @@ func Use() {
 func On(cb func(interface{})) {
 	shadow := bl.EnsureShadow()
 
-	bl.Pos( shadow.Left, shadow.Top )
+	shadow.Pos__Node_Only("drag")
 
 	mouse_drag.On( func(mouseDragEvent interface{}) {
 		e := mouseDragEvent.(mouse_drag.Event)
-
-		shadow := bl.EnsureShadowById(e.Target.Id)
 
 		absX, absY := bl.GetNodeAbsolutePos(e.Target.Parent)
 		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX

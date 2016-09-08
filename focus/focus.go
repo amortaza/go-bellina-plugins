@@ -33,14 +33,14 @@ func On_LifeCycle(onKey func(interface{}), onGainFocus func(interface{}), onLose
 	click.On( func(i interface{}) {
 		e := i.(click.Event)
 
-		if lastNodeId != e.Target.Id {
+		if g_lastNodeId != e.Target.Id {
 			if onGainFocus != nil && e.Target.Id == nodeId {
-				onGainFocus(newFocusGainLoseEvent(nodeId, lastNodeId))
+				onGainFocus(newFocusGainLoseEvent(nodeId, g_lastNodeId))
 			}
 		}
 
 		if nodeId == e.Target.Id {
-			lastNodeId = e.Target.Id
+			g_lastNodeId = e.Target.Id
 		}
 	})
 
@@ -60,19 +60,19 @@ func On_LifeCycle(onKey func(interface{}), onGainFocus func(interface{}), onLose
 
 func onBlInit() {
 	bl.RegisterLongTerm(bl.EventType_Key, func(e bl.Event) {
-		if lastNodeId == "" {
+		if g_lastNodeId == "" {
 			return
 		}
 
-		onKey, ok := g_onKeyByNodeId[lastNodeId]
+		onKey, ok := g_onKeyByNodeId[g_lastNodeId]
 
 		if ok {
-			onKey(newFocusKeyEvent(lastNodeId, e.(*bl.KeyEvent)))
+			onKey(newFocusKeyEvent(g_lastNodeId, e.(*bl.KeyEvent)))
 		}
 	})
 
 	bl.RegisterLongTerm(bl.EventType_Mouse_Button, func(mbe bl.Event) {
-		if lastNodeId == "" {
+		if g_lastNodeId == "" {
 			return
 		}
 
@@ -82,12 +82,12 @@ func onBlInit() {
 			return
 		}
 
-		if e.Target.Id != lastNodeId {
+		if e.Target.Id != g_lastNodeId {
 
-			onLoseFocus, ok := g_onLoseFocusByNodeId[lastNodeId]
+			onLoseFocus, ok := g_onLoseFocusByNodeId[g_lastNodeId]
 
 			if ok {
-				onLoseFocus(newFocusGainLoseEvent(e.Target.Id, lastNodeId))
+				onLoseFocus(newFocusGainLoseEvent(e.Target.Id, g_lastNodeId))
 			}
 
 			newId := e.Target.Id
@@ -95,10 +95,10 @@ func onBlInit() {
 			onGainFocus, ok2 := g_onGainFocusByNodeId[newId]
 
 			if ok2 {
-				onGainFocus(newFocusGainLoseEvent(newId, lastNodeId))
+				onGainFocus(newFocusGainLoseEvent(newId, g_lastNodeId))
 			}
 
-			lastNodeId = newId
+			g_lastNodeId = newId
 		}
 	})
 }

@@ -16,8 +16,6 @@ var _ANCHOR_BOTTOM uint32 = 1 << 3
 
 func init() {
 	g_stateByNodeId = make(map[string] *State)
-
-	//bl.Register_LifeCycle_AfterUser_Tick(tick)
 }
 
 type State struct {
@@ -58,17 +56,7 @@ func (state *State) End() {
 
 	node := bl.Current_Node
 
-	// to do
-	//fmt.Println("+ Pushing Docker ", node.Id)
-
 	bl.AddFunc(func() {
-
-		 //to do
-		//fmt.Println("* Processing Docker ", node.Id )
-		//if node.Id == "<listpane-scroll : listpane>" {
-		//	fmt.Println(">> In Docker...", state.anchorFlags & _ANCHOR_RIGHT != 0 && state.anchorFlags & _ANCHOR_LEFT != 0 )
-		//}
-
 		left, top, width, height := runLogic(node, state)
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 || state.anchorFlags & _ANCHOR_LEFT != 0 {
@@ -80,17 +68,11 @@ func (state *State) End() {
 		}
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 && state.anchorFlags & _ANCHOR_LEFT != 0 {
-			//to do
-			//fmt.Println("In Docker...width ", width)
-
 			node.Width = width
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 && state.anchorFlags & _ANCHOR_TOP != 0 {
 			node.Height = height
 		}
-
-		// to do
-		//bl.Disp(node)
 	})
 }

@@ -4,7 +4,7 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-var lastNodeId string
+var g_lastNodeId string
 
 var g_onKeyByNodeId map[string] func(interface{})
 var g_onLoseFocusByNodeId map[string] func(interface{})

@@ -4,90 +4,44 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-var Param_Left = "left"
-var Param_Top = "top"
-var Param_Right = "right"
-var Param_Bottom = "bottom"
+func Id() (*State) {
+	bl.RequireSettledBoundaries()
+	bl.RequireSettledKids()
 
-var plugin *Plugin
-
-func init() {
-	plugin = &Plugin{}
-	bl.Plugin(plugin)
-}
-
-var g_stateByNodeId map[string] *State
-
-func getOrCreateState(nodeId string) *State {
-	state, ok := g_stateByNodeId[nodeId]
-
-	if !ok {
-		state = &State{}
-
-		g_stateByNodeId[nodeId] = state
-	}
+	state := ensureState(bl.Current_Node.Id)
 
 	return state
 }
 
-func (c *Plugin) GetState() interface{} {
-	return getOrCreateState(bl.Current_Node.Id)
-}
+func runLogic(node *bl.Node, state *State) {
 
-func (c *Plugin) Tick() {
-}
-
-func runLogic(shadow *bl.ShadowNode, state *State) {
-	node := bl.GetNodeByID(shadow.Id)
-
-	padLeft := bl.GetI_fromNodeID(shadow.Id, "pad", Param_Left)
-	padTop := bl.GetI_fromNodeID(shadow.Id, "pad", Param_Top)
-	padRight := bl.GetI_fromNodeID(shadow.Id, "pad", Param_Right)
-	//padBottom := bl.GetI_fromNodeID(shadow.ID, "pad", Param_Bottom)
+	padLeft := state.Z_Left
+	padTop := state.Z_Top
+	padRight := state.Z_Right
+	padBottom := state.Z_Bottom
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
 	    	kid := e.Value.(*bl.Node)
 
-		kidShadow := bl.EnsureShadowByID(kid.Id)
-
-		if kidShadow.Left < padLeft {
-			kidShadow.Left = padLeft
+		if kid.Left < padLeft {
+			kid.Left = padLeft
 		}
 
-		if kidShadow.Top < padTop {
-			kidShadow.Top = padTop
+		if kid.Top < padTop {
+			kid.Top = padTop
 		}
 
-		right := kidShadow.Left + kidShadow.Width - 1
+		right := kid.Left + kid.Width - 1
 
-		if right > shadow.Width - padRight {
-			kid.Width = shadow.Width - padRight - kid.Left
+		if right > kid.Width - padRight {
+			kid.Width = kid.Width - padRight - kid.Left
+		}
+
+		bottom := kid.Top + kid.Height - 1
+
+		if bottom > kid.Height - padBottom {
+			kid.Height = kid.Height - padBottom - kid.Top
 		}
 	}
 }
 
-func (c *Plugin) On(cb func(interface{})) {
-	state := getOrCreateState(bl.Current_Node.Id)
-	shadow := bl.EnsureShadow()
-
-	for e := bl.Current_Node.Kids.Front(); e != nil; e = e.Next() {
-		kid := e.Value.(*bl.Node)
-		kidShadow := bl.EnsureShadowByID(kid.Id)
-
-		kid.Left = kidShadow.Left
-		kid.Top = kidShadow.Top
-		kid.Width = kidShadow.Width
-		kid.Height = kidShadow.Height
-	}
-
-	bl.AddPluginOnTick( func() {
-		runLogic(shadow, state)
-	})
-}
-
-func SetPaddingAll(pad int) {
-	bl.SetI("pad", Param_Left, pad)
-	bl.SetI("pad", Param_Top, pad)
-	bl.SetI("pad", Param_Right, pad)
-	bl.SetI("pad", Param_Bottom, pad)
-}

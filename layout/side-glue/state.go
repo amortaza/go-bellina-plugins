@@ -1,5 +1,7 @@
 package sideglue
 
+import "github.com/amortaza/go-bellina"
+
 type State struct {
 	Z_Left_NodeId	string
 	Z_Right_NodeId	string
@@ -21,7 +23,18 @@ func (s *State) RightNodeId(nodeId string) (*State){
 	return s
 }
 
-func (s *State) End() {
-	End()
+func (state *State) End() {
+
+	bl.AddFunc(func() {
+		leftNode := bl.GetNodeById(state.Z_Left_NodeId)
+		rightNode := bl.GetNodeById(state.Z_Right_NodeId)
+
+		a := rightNode.Left - leftNode.Left
+		b := leftNode.Width
+
+		delta := a - b
+
+		leftNode.Width += delta
+	})
 }
 
