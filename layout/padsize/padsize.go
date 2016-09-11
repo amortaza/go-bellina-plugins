@@ -1,4 +1,4 @@
-package pad
+package padsize
 
 import (
 	"github.com/amortaza/go-bellina"
@@ -24,23 +24,27 @@ func runLogic(node *bl.Node, state *State) {
 	    	kid := e.Value.(*bl.Node)
 
 		if kid.Left < padLeft {
+			//kid.OwnLeft("pad")
 			kid.Left = padLeft
 		}
 
 		if kid.Top < padTop {
+			//kid.OwnTop("pad")
 			kid.Top = padTop
 		}
 
 		right := kid.Left + kid.Width - 1
 
-		if right > kid.Width - padRight {
-			kid.Width = kid.Width - padRight - kid.Left
+		if right > node.Width - padRight {
+			//kid.OwnWidth("pad")
+			kid.Width = node.Width - padRight - kid.Left
 		}
 
 		bottom := kid.Top + kid.Height - 1
 
-		if bottom > kid.Height - padBottom {
-			kid.Height = kid.Height - padBottom - kid.Top
+		if bottom > node.Height - padBottom {
+			//kid.OwnHeight("pad")
+			kid.Height = node.Height - padBottom - kid.Top
 		}
 	}
 }

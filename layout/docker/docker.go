@@ -20,6 +20,8 @@ func init() {
 
 type State struct {
 	anchorFlags uint32
+
+	topPadding, leftPadding, rightPadding, bottomPadding int
 }
 
 func Id() (*State) {
@@ -28,28 +30,36 @@ func Id() (*State) {
 	return ensureState(bl.Current_Node.Id)
 }
 
-func (s *State) AnchorBottom() (*State) {
-	s.anchorFlags |= _ANCHOR_BOTTOM
+func (state *State) AnchorBottom(padding int) (*State) {
+	state.anchorFlags |= _ANCHOR_BOTTOM
 
-	return s
+	state.bottomPadding = padding
+
+	return state
 }
 
-func (s *State) AnchorTop() (*State) {
-	s.anchorFlags |= _ANCHOR_TOP
+func (state *State) AnchorTop(padding int) (*State) {
+	state.anchorFlags |= _ANCHOR_TOP
 
-	return s
+	state.topPadding = padding
+
+	return state
 }
 
-func (s *State) AnchorRight() (*State) {
-	s.anchorFlags |= _ANCHOR_RIGHT
+func (state *State) AnchorRight(padding int) (*State) {
+	state.anchorFlags |= _ANCHOR_RIGHT
 
-	return s
+	state.rightPadding = padding
+
+	return state
 }
 
-func (s *State) AnchorLeft() (*State) {
-	s.anchorFlags |= _ANCHOR_LEFT
+func (state *State) AnchorLeft(padding int) (*State) {
+	state.anchorFlags |= _ANCHOR_LEFT
 
-	return s
+	state.leftPadding = padding
+
+	return state
 }
 
 func (state *State) End() {
@@ -60,19 +70,27 @@ func (state *State) End() {
 		left, top, width, height := runLogic(node, state)
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 || state.anchorFlags & _ANCHOR_LEFT != 0 {
-			node.Left = left
+			if node.OwnLeft("docker") {
+				node.Left = left
+			}
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 || state.anchorFlags & _ANCHOR_TOP != 0 {
-			node.Top = top
+			if node.OwnTop("docker") {
+				node.Top = top
+			}
 		}
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 && state.anchorFlags & _ANCHOR_LEFT != 0 {
-			node.Width = width
+			if node.OwnWidth("docker") {
+				node.Width = width
+			}
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 && state.anchorFlags & _ANCHOR_TOP != 0 {
-			node.Height = height
+			if node.OwnHeight("docker") {
+				node.Height = height
+			}
 		}
 	})
 }

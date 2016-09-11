@@ -27,7 +27,7 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Draw()
+			border.Wire()
 
 			resize.Use()
 		}

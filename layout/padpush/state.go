@@ -1,4 +1,4 @@
-package pad
+package padpush
 
 import "github.com/amortaza/go-bellina"
 

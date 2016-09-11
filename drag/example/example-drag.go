@@ -27,7 +27,7 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Draw()
+			border.Wire()
 			drag.On(func(interface{}) {
 					fmt.Println("Dragging")
 				})
@@ -40,7 +40,7 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(100,100)
 
-			border.Draw()
+			border.Wire()
 		}
 		bl.End()
 	}

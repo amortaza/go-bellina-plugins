@@ -28,28 +28,42 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 
 	left, top, width, height = node.Left, node.Top, node.Width, node.Height
 
+	// right
 	if state.anchorFlags & _ANCHOR_RIGHT != 0 {
+
+		// left AND right
 		if state.anchorFlags & _ANCHOR_LEFT != 0 {
-			left = 0;
-			width = parentNode.Width
+			left = state.leftPadding;
+			width = parentNode.Width - state.leftPadding - state.rightPadding
+
+			if width < 16 {
+				width = 16
+			}
 
 		} else {
-			left = parentNode.Width - node.Width
+			// right only
+			left = parentNode.Width - node.Width - state.rightPadding
 		}
 	} else if state.anchorFlags & _ANCHOR_LEFT != 0 {
-		left = 0;
+		// left only
+		left = state.leftPadding;
 	}
 
+	// bottom
 	if state.anchorFlags & _ANCHOR_BOTTOM != 0 {
+
+		// bottom AND top
 		if state.anchorFlags & _ANCHOR_TOP != 0 {
-			top = 0;
-			height = parentNode.Height
+			top = state.topPadding;
+			height = parentNode.Height - state.topPadding - state.bottomPadding
 
 		} else {
-			top = parentNode.Height - node.Height
+			// bottom only
+			top = parentNode.Height - node.Height - state.bottomPadding
 		}
 	} else if state.anchorFlags & _ANCHOR_TOP != 0 {
-		top = 0;
+		// top only
+		top = state.topPadding;
 	}
 
 	return left, top, width, height

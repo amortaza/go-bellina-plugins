@@ -28,7 +28,7 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Draw()
+			border.Wire()
 
 			click.On(func(e interface{}) {
 				animation.StartPath("red", "hi", 0, 400, 200, func(shadow *bl.ShadowNode, value float32) {
@@ -47,7 +47,7 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(100,100)
 
-			border.Draw()
+			border.Wire()
 		}
 		bl.End()
 	}

@@ -27,7 +27,7 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Draw()
+			border.Wire()
 
 			focus.On_LifeCycle(func(i interface{}) {
 				fmt.Println("Key")
@@ -44,7 +44,7 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(100,100)
 
-			border.Draw()
+			border.Wire()
 
 			focus.On_LifeCycle(func(i interface{}) {
 				fmt.Println("Key")
