@@ -13,8 +13,15 @@ var _BOTTOM uint32 = 1 << 3
 var g_startWidth, g_startHeight int
 var g_flags uint32
 var g_otherId string
+var g_sudo string
 
 type State struct {
+}
+
+func (state *State) Sudo(sudo string) (*State) {
+    g_sudo = sudo
+
+    return state
 }
 
 func (state *State) Left() (*State) {
@@ -47,23 +54,23 @@ func (state *State) End() {
 
 func set(shadowOther, shadowCur *bl.ShadowNode) {
     if g_flags & _LEFT != 0 {
-        shadowOther.Left__Node_Only("side-resize-other")
-        shadowOther.Width__Node_Only("side-resize-other")
+        shadowOther.Left__Node_Only(g_sudo)
+        shadowOther.Width__Node_Only(g_sudo)
     }
 
     if g_flags & _TOP != 0 {
-        shadowOther.Top__Node_Only("side-resize-other")
-        shadowOther.Height__Node_Only("side-resize-other")
+        shadowOther.Top__Node_Only(g_sudo)
+        shadowOther.Height__Node_Only(g_sudo)
     }
 
     if g_flags & _RIGHT != 0 {
-        shadowOther.Width__Node_Only("side-resize-other")
-        shadowCur.Left__Node_Only("side-resize-other")
+        shadowOther.Width__Node_Only(g_sudo)
+        shadowCur.Left__Node_Only(g_sudo)
     }
 
     if g_flags & _BOTTOM != 0 {
-        shadowOther.Height__Node_Only("side-resize-other")
-        shadowCur.Top__Node_Only("side-resize-other")
+        shadowOther.Height__Node_Only(g_sudo)
+        shadowCur.Top__Node_Only(g_sudo)
     }
 }
 

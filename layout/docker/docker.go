@@ -20,7 +20,7 @@ func init() {
 
 type State struct {
 	anchorFlags uint32
-
+	sudo string
 	topPadding, leftPadding, rightPadding, bottomPadding int
 }
 
@@ -28,6 +28,12 @@ func Id() (*State) {
 	bl.RequireSettledBoundaries()
 
 	return ensureState(bl.Current_Node.Id)
+}
+
+func (state *State) Sudo(sudo string) (*State) {
+	state.sudo = sudo
+
+	return state
 }
 
 func (state *State) AnchorBottom(padding int) (*State) {
@@ -70,27 +76,23 @@ func (state *State) End() {
 		left, top, width, height := runLogic(node, state)
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 || state.anchorFlags & _ANCHOR_LEFT != 0 {
-			if node.OwnLeft("docker") {
-				node.Left = left
-			}
+			node.OwnLeft( state.sudo )
+			node.Left = left
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 || state.anchorFlags & _ANCHOR_TOP != 0 {
-			if node.OwnTop("docker") {
-				node.Top = top
-			}
+			node.OwnTop(state.sudo)
+			node.Top = top
 		}
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 && state.anchorFlags & _ANCHOR_LEFT != 0 {
-			if node.OwnWidth("docker") {
-				node.Width = width
-			}
+			node.OwnWidth(state.sudo)
+			node.Width = width
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 && state.anchorFlags & _ANCHOR_TOP != 0 {
-			if node.OwnHeight("docker") {
-				node.Height = height
-			}
+			node.OwnHeight(state.sudo)
+			node.Height = height
 		}
 	})
 }

@@ -11,10 +11,11 @@ func fake() {
 }
 
 func NodeId(otherId string) (*State){
-    g_otherId = otherId
-    g_flags = 0
+	g_otherId = otherId
+	g_flags = 0
+	g_sudo = "side-resize"
 
-    return &State{}
+    	return &State{}
 }
 
 func logic() {

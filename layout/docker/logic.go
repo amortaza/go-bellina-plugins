@@ -15,7 +15,7 @@ func ensureState(nodeId string) *State {
 	state, ok := g_stateByNodeId[nodeId]
 
 	if !ok {
-		state = &State{}
+		state = &State{ sudo: "docker"}
 
 		g_stateByNodeId[nodeId] = state
 	}
