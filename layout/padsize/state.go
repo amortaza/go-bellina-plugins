@@ -54,8 +54,6 @@ func (state *State) Bottom(value int) (*State){
 func (state *State) End() {
 	node := bl.Current_Node
 
-	bl.AddFunc( func() {
-		runLogic(node, state)
-	})
+	runLogic(node, state)
 }
 

@@ -36,8 +36,9 @@ func (s *State) Top(top int) (*State){
 func (s *State) End() {
 	node := bl.Current_Node
 
-	bl.AddFunc(func() {
+	bl.AddFunc( func() {
+
 		runLogic(node, s)
-	})
+	});
 }
 

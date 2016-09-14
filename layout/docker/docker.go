@@ -69,7 +69,6 @@ func (state *State) AnchorLeft(padding int) (*State) {
 }
 
 func (state *State) End() {
-
 	node := bl.Current_Node
 
 	bl.AddFunc(func() {

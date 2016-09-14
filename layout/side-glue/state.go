@@ -25,7 +25,7 @@ func (s *State) RightNodeId(nodeId string) (*State){
 
 func (state *State) End() {
 
-	bl.AddFunc(func() {
+	bl.AddFunc(func(){
 		leftNode := bl.GetNodeById(state.Z_Left_NodeId)
 		rightNode := bl.GetNodeById(state.Z_Right_NodeId)
 
@@ -35,6 +35,9 @@ func (state *State) End() {
 		delta := a - b
 
 		leftNode.Width += delta
+
+		bl.Stabilize(leftNode)
+		bl.Stabilize(rightNode)
 	})
 }
 
