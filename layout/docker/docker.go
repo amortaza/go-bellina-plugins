@@ -2,12 +2,7 @@ package docker
 
 import (
 	"github.com/amortaza/go-bellina"
-	"fmt"
 )
-
-func fake2() {
-    var _ = fmt.Println
-}
 
 var _ANCHOR_LEFT uint32 = 1 << 0
 var _ANCHOR_RIGHT uint32 = 1 << 1
@@ -25,7 +20,7 @@ type State struct {
 }
 
 func Id() (*State) {
-	bl.RequireSettledBoundaries()
+	bl.RequireSettledBoundary()
 
 	return ensureState(bl.Current_Node.Id)
 }

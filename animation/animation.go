@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	bl.Register_LifeCycle_AfterUser_Tick(tick)
+	bl.Register_LifeCycle_After_UserTick_LongTerm(tick)
 }
 
 func StartPath(nodeId string, animId string, startValue, endValue float32, numSteps int, cb func(shadow *bl.ShadowNode, value float32)) {

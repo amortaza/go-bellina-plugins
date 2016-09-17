@@ -3,12 +3,7 @@ package side_resize
 import (
 	"github.com/amortaza/go-bellina-plugins/mouse-drag"
 	"github.com/amortaza/go-bellina"
-	"fmt"
 )
-
-func fake() {
-	var _ = fmt.Print
-}
 
 func NodeId(otherId string) (*State){
 	g_otherId = otherId

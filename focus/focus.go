@@ -59,7 +59,7 @@ func On_LifeCycle(onKey func(interface{}), onGainFocus func(interface{}), onLose
 }
 
 func onBlInit() {
-	bl.RegisterLongTerm(bl.EventType_Key, func(e bl.Event) {
+	bl.RegisterLongTerm(bl.eventType_Key, func(e bl.Event) {
 		if g_lastNodeId == "" {
 			return
 		}

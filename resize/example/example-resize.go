@@ -4,7 +4,7 @@ import (
 	"runtime"
 	"fmt"
 	"github.com/amortaza/go-bellina"
-	"github.com/amortaza/go-hal-oob"
+	"github.com/amortaza/go-hal-g5"
 	"github.com/amortaza/go-dark-ux"
 	"github.com/amortaza/go-dark-ux/border"
 	"github.com/amortaza/go-bellina-plugins/resize"
@@ -27,13 +27,12 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Wire()
+			//border.Wire()
+			border.Fill(100,0,0)
 
 			resize.Use()
 		}
 		bl.End()
-
-
 	}
 	bl.End()
 }

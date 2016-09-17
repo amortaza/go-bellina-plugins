@@ -5,7 +5,7 @@ import (
 )
 
 func Id() (*State) {
-	bl.RequireSettledBoundaries()
+	bl.RequireSettledBoundary()
 	bl.RequireSettledKids()
 
 	state := ensureState(bl.Current_Node.Id)

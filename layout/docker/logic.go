@@ -2,12 +2,7 @@ package docker
 
 import (
 	"github.com/amortaza/go-bellina"
-	"fmt"
 )
-
-func fake() {
-    var _ = fmt.Println
-}
 
 var g_stateByNodeId map[string] *State
 

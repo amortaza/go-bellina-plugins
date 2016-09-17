@@ -2,7 +2,7 @@ package mouse_drag
 
 import (
 	"github.com/amortaza/go-bellina"
-	"github.com/amortaza/go-xel2"
+	"github.com/amortaza/go-xel-goxjs"
 	"fmt"
 )
 
@@ -14,7 +14,7 @@ type Event struct {
 }
 
 func init() {
-	bl.Register_LifeCycle_BeforeUser_Tick(func() {
+	bl.Register_LifeCycle_Before_UserTick_LongTerm(func() {
 		gEndCbByNodeId = make(map[string]func(interface{}))
 	})
 

@@ -4,7 +4,7 @@ import (
 	"runtime"
 	"fmt"
 	"github.com/amortaza/go-bellina"
-	"github.com/amortaza/go-hal-oob"
+	"github.com/amortaza/go-hal-g5"
 	"github.com/amortaza/go-dark-ux"
 	"github.com/amortaza/go-dark-ux/border"
 	"github.com/amortaza/go-bellina-plugins/drag-other"
@@ -12,10 +12,6 @@ import (
 	"github.com/amortaza/go-bellina-plugins/resize-other"
 	"github.com/amortaza/go-bellina-plugins/drag"
 )
-
-func fake() {
-	var _ = drag_other.Use
-}
 
 func initialize() {
 	go_dark_ux.Init()

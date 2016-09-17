@@ -3,7 +3,10 @@ package hover
 import (
 	"github.com/amortaza/go-bellina"
 	"github.com/amortaza/go-adt"
+	"container/list"
 )
+
+var g_dirtyCalls = list.New()
 
 // must be interface{}
 func On(cb func(interface{})) {
@@ -11,11 +14,26 @@ func On(cb func(interface{})) {
 	g_callbacksByNodeId.Add(bl.Current_Node.Id, cb)
 }
 
-func init() {
-	g_callbacksByNodeId = adt.NewCallbacksByID()
+func AddDirtyCall(cb func()) {
+	g_dirtyCalls.PushBack(cb)
+}
 
-	bl.Register_LifeCycle_BeforeUser_Tick(func() {
+func init() {
+	g_callbacksByNodeId = adt.NewCallbacksById()
+
+	bl.Register_LifeCycle_Before_UserTick_LongTerm(func() {
 		g_callbacksByNodeId.ClearAll()
+	})
+
+	bl.Register_LifeCycle_After_UserTick_LongTerm(func() {
+		for e := g_dirtyCalls.Front(); e != nil; e = e.Next() {
+
+			cb := e.Value.(func())
+
+			cb()
+		}
+
+		g_dirtyCalls.Init()
 	})
 
 	bl.RegisterLongTerm( bl.EventType_Mouse_Move, func(e bl.Event) {

@@ -4,19 +4,12 @@ import (
     "runtime"
     "fmt"
     "github.com/amortaza/go-bellina"
-    "github.com/amortaza/go-hal-oob"
+    "github.com/amortaza/go-hal-g5"
     "github.com/amortaza/go-dark-ux"
     "github.com/amortaza/go-dark-ux/border"
-    "github.com/amortaza/go-bellina-plugins/drag-other"
     "github.com/amortaza/go-bellina-plugins/layout/docker"
     "github.com/amortaza/go-bellina-plugins/side-resize"
 )
-
-func fake() {
-    var _ = drag_other.Use
-    var _ = docker.Id
-
-}
 
 func initialize() {
     go_dark_ux.Init()
