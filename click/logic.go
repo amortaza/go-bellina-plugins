@@ -3,7 +3,6 @@ package click
 import (
 	"github.com/amortaza/go-bellina"
 	"fmt"
-	"github.com/amortaza/go-xel2"
 )
 
 var gLastNodeId string
@@ -16,7 +15,7 @@ func logic(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(inte
 
 		e := event.(*bl.MouseButtonEvent)
 
-		if e.ButtonAction == xel.Button_Action_Down {
+		if e.ButtonAction == bl.Button_Action_Down {
 
 			if e.Target.Id != nodeId {
 				return
@@ -28,7 +27,7 @@ func logic(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(inte
 				onDown(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
 			}
 
-		} else if e.ButtonAction == xel.Button_Action_Up {
+		} else if e.ButtonAction == bl.Button_Action_Up {
 
 			if gLastNodeId == e.Target.Id {
 				// we have a click!
