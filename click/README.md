@@ -46,6 +46,6 @@ See [example usage](click/example)
 
 * the type of `event` is `click.Event`.  Use `event.(click.Event)` to cast.
 
-> Note that on `onUpAndMiss`, `event` will be nil.
+> Note that in `onUpAndMiss(event)` callback, value of `event` will be nil.
 
 We are done!
