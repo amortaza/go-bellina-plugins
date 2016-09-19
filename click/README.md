@@ -16,7 +16,7 @@ We also need be hooks into the `life-cycle` of a click event.  These are:
 
 ## Example Usage
 
-![Sample](click/example/click.jpg?raw=true "Sample")
+![Sample](example/click.jpg?raw=true "Sample")
 
 See [example usage](click/example)
 
