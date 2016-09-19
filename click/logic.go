@@ -7,7 +7,7 @@ import (
 
 var gLastNodeId string
 
-func logic(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(interface{})) {
+func logic(cb, onDown, onUpAndMiss func(interface{})) {
 
 	nodeId := bl.Current_Node.Id
 
@@ -33,7 +33,7 @@ func logic(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(inte
 				// we have a click!
 
 				if cb != nil && gLastNodeId == nodeId {
-					cb(Event{bl.Mouse_X, bl.Mouse_X, e.Target})
+					cb(Event{e.X, e.Y, e.Target})
 				}
 
 			} else if gLastNodeId == nodeId {

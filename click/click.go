@@ -9,13 +9,13 @@ type Event struct {
 	Target *bl.Node
 }
 
-// click.On( func )
+// click.On( cb )
 func On(cb func(interface{})) {
 	logic(cb, nil, nil)
 }
 
-// click.On_WithLifeCycle( func )
-func On_WithLifeCycle(cb func(interface{}), onDown func(interface{}), onUpAndMiss func(interface{})) {
+// click.On_WithLifeCycle( successCb, downCb, upAndMissCb )
+func On_WithLifeCycle(cb, onDown, onUpAndMiss func(interface{})) {
 	logic(cb, onDown, onUpAndMiss)
 }
 
