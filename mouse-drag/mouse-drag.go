@@ -21,7 +21,7 @@ func init() {
 
 		e := mouseButtonEvent.(*bl.MouseButtonEvent)
 
-		if e.ButtonAction == bl.Button_Action_Up {
+		if e.ButtonAction == hal.Button_Action_Up {
 			if gLastNodeId != "" {
 				endCb, ok := gEndCbByNodeId[gLastNodeId]
 
@@ -64,7 +64,7 @@ func On_FullLifeCycle(cb func(interface{}), startCb func(interface{}), endCb fun
 	nodeId := bl.Current_Node.Id
 
 	bl.OnMouseButton( func(e *bl.MouseButtonEvent) {
-		if e.ButtonAction == bl.Button_Action_Down {
+		if e.ButtonAction == hal.Button_Action_Down {
 
 			// target == node when target is child of node!!
 			if e.Target.Id != nodeId {
@@ -83,7 +83,7 @@ func On_FullLifeCycle(cb func(interface{}), startCb func(interface{}), endCb fun
 				startCb(newEvent(bl.Mouse_X, bl.Mouse_Y, e.Target))
 			}
 
-		} else if e.ButtonAction == bl.Button_Action_Up {
+		} else if e.ButtonAction == hal.Button_Action_Up {
 
 			// lastnodeid CAN be empty
 			if endCb != nil && gLastNodeId == nodeId {

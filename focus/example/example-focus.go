@@ -27,7 +27,7 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Wire()
+			border.Wire(255, 255, 0)
 
 			focus.On_LifeCycle(func(i interface{}) {
 				fmt.Println("Key")
@@ -44,7 +44,7 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(100,100)
 
-			border.Wire()
+			border.Wire(255, 255, 0)
 
 			focus.On_LifeCycle(func(i interface{}) {
 				fmt.Println("Key")
@@ -67,7 +67,7 @@ func init() {
 }
 
 func main() {
-	bl.Start( haloob.New(), 1280, 1024, "Bellina v0.2", initialize, tick, uninit )
+	bl.Start( hal_g5.NewHal(), "Bellina v0.2", 1280, 1024, initialize, tick, uninit )
 
 	fmt.Println("bye!")
 }

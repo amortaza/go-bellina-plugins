@@ -54,7 +54,7 @@ func (state *State) End() {
 
 func set(shadowOther, shadowCur *bl.ShadowNode) {
     if g_flags & _LEFT != 0 {
-        shadowOther.Left__Node_Only(g_sudo)
+        shadowOther.SetLeft_on_Node_Only(g_sudo)
         shadowOther.Width__Node_Only(g_sudo)
     }
 
@@ -65,7 +65,7 @@ func set(shadowOther, shadowCur *bl.ShadowNode) {
 
     if g_flags & _RIGHT != 0 {
         shadowOther.Width__Node_Only(g_sudo)
-        shadowCur.Left__Node_Only(g_sudo)
+        shadowCur.SetLeft_on_Node_Only(g_sudo)
     }
 
     if g_flags & _BOTTOM != 0 {

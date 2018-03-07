@@ -28,16 +28,16 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Wire()
+			border.Wire(255, 255, 0)
 
 			click.On(func(e interface{}) {
 				animation.StartPath("red", "hi", 0, 400, 200, func(shadow *bl.ShadowNode, value float32) {
-					shadow.Left__Self_and_Node(int(value), "animation")
+					shadow.SetLeft_on_Self_and_Node(int(value), "animation")
 				})
 			})
 
 			shadow := bl.EnsureShadow()
-			shadow.Left__Node_Only("animation")
+			shadow.SetLeft_on_Node_Only("animation")
 		}
 		bl.End()
 
@@ -47,7 +47,7 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(100,100)
 
-			border.Wire()
+			border.Wire(255, 255, 0)
 		}
 		bl.End()
 	}
@@ -62,7 +62,7 @@ func init() {
 }
 
 func main() {
-	bl.Start( haloob.New(), 1280, 1024, "Bellina v0.2", initialize, tick, uninit )
+	bl.Start( hal_g5.NewHal(), "Bellina v0.2", 1280, 1024, initialize, tick, uninit )
 
 	fmt.Println("bye!")
 }

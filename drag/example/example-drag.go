@@ -27,7 +27,7 @@ func tick() {
 			bl.Pos(10,10)
 			bl.Dim(100,100)
 
-			border.Wire()
+			border.Wire(255, 255, 0)
 			drag.On(func(interface{}) {
 					fmt.Println("Dragging")
 				})
@@ -40,7 +40,7 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(100,100)
 
-			border.Wire()
+			border.Wire(255, 255, 0)
 		}
 		bl.End()
 	}
@@ -55,7 +55,7 @@ func init() {
 }
 
 func main() {
-	bl.Start( haloob.New(), 1280, 1024, "Bellina v0.2", initialize, tick, uninit )
+	bl.Start( hal_g5.NewHal(), "Bellina v0.2", 1280, 1024, initialize, tick, uninit )
 
 	fmt.Println("bye!")
 }
