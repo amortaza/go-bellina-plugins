@@ -44,7 +44,7 @@ func logic() {
 			if flags & _LEFT != 0 {
 				otherRight := shadowOther.Left + shadowOther.Width
 
-				shadowOther.Left = bl.Mouse_X - e.MouseOffsetX - cur.Left
+				shadowOther.Left = bl.Mouse_X - e.MouseOffsetX - cur.left
 				shadowOther.Width = otherRight - shadowOther.Left
 			}
 
@@ -56,7 +56,7 @@ func logic() {
 			if flags & _TOP != 0 {
 				otherBottom := shadowOther.Top + shadowOther.Height
 
-				shadowOther.Top = bl.Mouse_Y - e.MouseOffsetY - cur.Top
+				shadowOther.Top = bl.Mouse_Y - e.MouseOffsetY - cur.top
 				shadowOther.Height = otherBottom - shadowOther.Top
 			}
 
@@ -74,7 +74,7 @@ func logic() {
 
 		// start drag
 		func(mouseDragEvent interface{}) {
-			g_startWidth, g_startHeight = shadowOther.BackingNode.Width, shadowOther.BackingNode.Height
+			g_startWidth, g_startHeight = shadowOther.BackingNode.width, shadowOther.BackingNode.height
 		},
 
 		// end drag??

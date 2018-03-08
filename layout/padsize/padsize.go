@@ -24,28 +24,28 @@ func runLogic(node *bl.Node, state *State) {
 		for e := node.Kids.Front(); e != nil; e = e.Next() {
 			kid := e.Value.(*bl.Node)
 
-			if kid.Left < padLeft {
+			if kid.left < padLeft {
 				//kid.OwnLeft("pad")
-				kid.Left = padLeft
+				kid.left = padLeft
 			}
 
-			if kid.Top < padTop {
+			if kid.top < padTop {
 				//kid.OwnTop("pad")
-				kid.Top = padTop
+				kid.top = padTop
 			}
 
-			right := kid.Left + kid.Width - 1
+			right := kid.left + kid.width - 1
 
-			if right > node.Width - padRight {
+			if right > node.width- padRight {
 				//kid.OwnWidth("pad")
-				kid.Width = node.Width - padRight - kid.Left
+				kid.width = node.width - padRight - kid.left
 			}
 
-			bottom := kid.Top + kid.Height - 1
+			bottom := kid.top + kid.height - 1
 
-			if bottom > node.Height - padBottom {
+			if bottom > node.height- padBottom {
 				//kid.OwnHeight("pad")
-				kid.Height = node.Height - padBottom - kid.Top
+				kid.height = node.height - padBottom - kid.top
 			}
 		}
 	})

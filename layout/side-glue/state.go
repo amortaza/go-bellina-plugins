@@ -29,12 +29,12 @@ func (state *State) End() {
 		leftNode := bl.GetNodeById(state.Z_Left_NodeId)
 		rightNode := bl.GetNodeById(state.Z_Right_NodeId)
 
-		a := rightNode.Left - leftNode.Left
-		b := leftNode.Width
+		a := rightNode.left - leftNode.left
+		b := leftNode.width
 
 		delta := a - b
 
-		leftNode.Width += delta
+		leftNode.width += delta
 
 		bl.Stabilize(leftNode)
 		bl.Stabilize(rightNode)

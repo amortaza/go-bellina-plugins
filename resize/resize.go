@@ -46,7 +46,7 @@ func On(cb func(interface{})) {
 		func(mouseDragEvent interface{}) {
 			e := mouseDragEvent.(mouse_drag.Event)
 
-			g_startWidth, g_startHeight = e.Target.Width, e.Target.Height
+			g_startWidth, g_startHeight = e.Target.width, e.Target.height
 		},
 
 		nil)

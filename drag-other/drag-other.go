@@ -31,8 +31,8 @@ func On(nodeId string, cb func(interface{})) {
 		e := mouseDragEvent.(mouse_drag.Event)
 
 		absX, absY := bl.GetNodeAbsolutePos(shadow.BackingNode.Parent)
-		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX - cur.Left
-		shadow.Top = bl.Mouse_Y - e.MouseOffsetY - absY - cur.Top
+		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX - cur.left
+		shadow.Top = bl.Mouse_Y - e.MouseOffsetY - absY - cur.top
 
 		shadow.Pos__Node_Only(g_sudo)
 

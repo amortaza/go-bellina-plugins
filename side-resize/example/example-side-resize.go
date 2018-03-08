@@ -40,13 +40,13 @@ func tick() {
                 border.Fill(0,0,50)
 
                 //drag.Use()
-                //side_resize_other.NodeId("green").Left().End()
-                //side_resize_other.NodeId("green").Top().End()
+                //side_resize_other.NodeId("green").left().End()
+                //side_resize_other.NodeId("green").top().End()
                 //side_resize_other.NodeId("green").Right().End()
                 //side_resize_other.NodeId("green").Bottom().End()
                 //side_resize_other.NodeId("green").Right().Bottom().End()
-                //side_resize_other.NodeId("green").Right().Top().End()
-                //side_resize_other.NodeId("green").Left().Bottom().End()
+                //side_resize_other.NodeId("green").Right().top().End()
+                //side_resize_other.NodeId("green").left().Bottom().End()
                 docker.Id().AnchorRight(10).End()
                 side_resize.NodeId("green").Right().Top().End()
             }

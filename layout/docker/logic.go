@@ -21,7 +21,7 @@ func ensureState(nodeId string) *State {
 func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 	parentNode := node.Parent
 
-	left, top, width, height = node.Left, node.Top, node.Width, node.Height
+	left, top, width, height = node.left, node.top, node.width, node.height
 
 	// right
 	if state.anchorFlags & _ANCHOR_RIGHT != 0 {
@@ -29,7 +29,7 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 		// left AND right
 		if state.anchorFlags & _ANCHOR_LEFT != 0 {
 			left = state.leftPadding;
-			width = parentNode.Width - state.leftPadding - state.rightPadding
+			width = parentNode.width - state.leftPadding - state.rightPadding
 
 			if width < 16 {
 				width = 16
@@ -37,7 +37,7 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 
 		} else {
 			// right only
-			left = parentNode.Width - node.Width - state.rightPadding
+			left = parentNode.width - node.width - state.rightPadding
 		}
 	} else if state.anchorFlags & _ANCHOR_LEFT != 0 {
 		// left only
@@ -50,11 +50,11 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 		// bottom AND top
 		if state.anchorFlags & _ANCHOR_TOP != 0 {
 			top = state.topPadding;
-			height = parentNode.Height - state.topPadding - state.bottomPadding
+			height = parentNode.height - state.topPadding - state.bottomPadding
 
 		} else {
 			// bottom only
-			top = parentNode.Height - node.Height - state.bottomPadding
+			top = parentNode.height - node.height - state.bottomPadding
 		}
 	} else if state.anchorFlags & _ANCHOR_TOP != 0 {
 		// top only

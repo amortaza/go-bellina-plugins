@@ -8,6 +8,7 @@ import (
 	"github.com/amortaza/go-dark-ux"
 	"github.com/amortaza/go-dark-ux/border"
 	"github.com/amortaza/go-bellina-plugins/layout/docker"
+	"github.com/amortaza/go-bellina-plugins/drag"
 )
 
 func initialize() {
@@ -25,11 +26,23 @@ func tick() {
 		{
 			bl.Id("red")
 			bl.Pos(10,10)
-			bl.Dim(100,100)
+			bl.Dim(500,500)
 
 			border.Wire(255, 255, 0)
 
-			docker.Id().AnchorLeft().AnchorTop().AnchorBottom().End()
+			bl.Div()
+			{
+				bl.Id("child")
+				bl.Pos(10,10)
+				bl.Dim(100,100)
+
+				border.Wire(25, 255, 100)
+
+				docker.Id().AnchorLeft(10).AnchorTop(10).AnchorBottom(10).End()
+			}
+			bl.End()
+
+			drag.Use()
 		}
 		bl.End()
 	}

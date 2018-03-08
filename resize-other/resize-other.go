@@ -45,7 +45,7 @@ func On(nodeId string, cb func(interface{})) {
 		// start drag
 		func(mouseDragEvent interface{}) {
 
-			g_startWidth, g_startHeight = shadow.BackingNode.Width, shadow.BackingNode.Height
+			g_startWidth, g_startHeight = shadow.BackingNode.width, shadow.BackingNode.height
 		},
 
 		nil)

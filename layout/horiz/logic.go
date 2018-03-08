@@ -12,8 +12,8 @@ func runLogic(node *bl.Node, state *State) {
 
 		kid := e.Value.(*bl.Node)
 
-		kid.Left = left
+		kid.left = left
 
-		left += kid.Width + spacing
+		left += kid.width + spacing
 	}
 }

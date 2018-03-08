@@ -26,11 +26,13 @@ func tick() {
 			bl.Id("red")
 			bl.Pos(10,10)
 			bl.Dim(100,100)
-
-			border.Wire(255, 255, 0)
+			border.Wire(255, 0, 0)
 			drag.On(func(interface{}) {
 					fmt.Println("Dragging")
-				})
+					})
+
+
+
 		}
 		bl.End()
 
@@ -40,7 +42,7 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(100,100)
 
-			border.Wire(255, 255, 0)
+			border.Wire(0, 255, 0)
 		}
 		bl.End()
 	}

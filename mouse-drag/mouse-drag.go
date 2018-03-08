@@ -3,6 +3,7 @@ package mouse_drag
 import (
 	"github.com/amortaza/go-bellina"
 	"fmt"
+	"github.com/amortaza/go-hal"
 )
 
 type Event struct {
@@ -13,6 +14,7 @@ type Event struct {
 }
 
 func init() {
+
 	bl.Register_LifeCycle_Before_UserTick_LongTerm(func() {
 		gEndCbByNodeId = make(map[string]func(interface{}))
 	})
@@ -22,7 +24,9 @@ func init() {
 		e := mouseButtonEvent.(*bl.MouseButtonEvent)
 
 		if e.ButtonAction == hal.Button_Action_Up {
+
 			if gLastNodeId != "" {
+
 				endCb, ok := gEndCbByNodeId[gLastNodeId]
 
 				if ok {

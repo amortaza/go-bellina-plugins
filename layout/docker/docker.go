@@ -66,27 +66,28 @@ func (state *State) AnchorLeft(padding int) (*State) {
 func (state *State) End() {
 	node := bl.Current_Node
 
-	bl.AddFunc(func() {
+	bl.AddStabilizeFunc_PreKids(func() {
+
 		left, top, width, height := runLogic(node, state)
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 || state.anchorFlags & _ANCHOR_LEFT != 0 {
-			node.OwnLeft( state.sudo )
-			node.Left = left
+			node.OwnsLeft( state.sudo )
+			node.left = left
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 || state.anchorFlags & _ANCHOR_TOP != 0 {
-			node.OwnTop(state.sudo)
-			node.Top = top
+			node.OwnsTop(state.sudo)
+			node.top = top
 		}
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 && state.anchorFlags & _ANCHOR_LEFT != 0 {
-			node.OwnWidth(state.sudo)
-			node.Width = width
+			node.OwnsWidth(state.sudo)
+			node.width = width
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 && state.anchorFlags & _ANCHOR_TOP != 0 {
-			node.OwnHeight(state.sudo)
-			node.Height = height
+			node.OwnsHeight(state.sudo)
+			node.height = height
 		}
 	})
 }
