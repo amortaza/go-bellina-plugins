@@ -7,8 +7,8 @@ import (
 	"github.com/amortaza/go-hal-g5"
 	"github.com/amortaza/go-dark-ux"
 	"github.com/amortaza/go-dark-ux/border"
-	"github.com/amortaza/go-bellina-plugins/drag-other"
 	"github.com/amortaza/go-bellina-plugins/layout/docker"
+	"github.com/amortaza/go-bellina-plugins/drag-other"
 )
 
 func initialize() {
@@ -28,26 +28,26 @@ func tick() {
 			bl.Pos(100,100)
 			bl.Dim(400,400)
 
-			border.Fill(0,50,0)
+			border.Fill(0,250,0)
 
 			bl.Div()
-						{
-							bl.Id("blue")
-							bl.Pos(50,50)
-							bl.Dim(100,100)
+			{
+				bl.Id("blue")
+				bl.Pos(50,50)
+				bl.Dim(100,100)
 
-							border.Fill(50,0,50)
-						}
-						bl.End()
+				border.Fill(0,0,250)
+			}
+			bl.End()
 
 			bl.Div()
 			{
 				bl.Id("red")
-				bl.Pos(50,50)
+				bl.Pos(150,150)
 				bl.Dim(100,100)
 				bl.SettleBoundary()
 
-				border.Fill(50,0,0)
+				border.Fill(250,0,0)
 
 				drag_other.Use("green")
 				//drag_other.Use("blue")

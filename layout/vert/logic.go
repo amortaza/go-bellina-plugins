@@ -12,8 +12,8 @@ func runLogic(node *bl.Node, state *State) {
 
 		kid := e.Value.(*bl.Node)
 
-		kid.top = y
+		kid.SetTop(y)
 
-		y += kid.height + spacing
+		y += kid.Height() + spacing
 	}
 }

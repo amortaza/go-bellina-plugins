@@ -72,22 +72,22 @@ func (state *State) End() {
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 || state.anchorFlags & _ANCHOR_LEFT != 0 {
 			node.OwnsLeft( state.sudo )
-			node.left = left
+			node.SetLeft(left)
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 || state.anchorFlags & _ANCHOR_TOP != 0 {
 			node.OwnsTop(state.sudo)
-			node.top = top
+			node.SetTop(top)
 		}
 
 		if state.anchorFlags & _ANCHOR_RIGHT != 0 && state.anchorFlags & _ANCHOR_LEFT != 0 {
 			node.OwnsWidth(state.sudo)
-			node.width = width
+			node.SetWidth(width)
 		}
 
 		if state.anchorFlags & _ANCHOR_BOTTOM != 0 && state.anchorFlags & _ANCHOR_TOP != 0 {
 			node.OwnsHeight(state.sudo)
-			node.height = height
+			node.SetHeight(height)
 		}
 	})
 }

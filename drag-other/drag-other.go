@@ -23,7 +23,7 @@ func Use(nodeId string) {
 func On(nodeId string, cb func(interface{})) {
 	shadow := bl.EnsureShadowById(nodeId)
 
-	shadow.Pos__Node_Only(g_sudo)
+	shadow.SetPos_on_Node_Only(g_sudo)
 
 	cur := bl.Current_Node
 
@@ -31,10 +31,10 @@ func On(nodeId string, cb func(interface{})) {
 		e := mouseDragEvent.(mouse_drag.Event)
 
 		absX, absY := bl.GetNodeAbsolutePos(shadow.BackingNode.Parent)
-		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX - cur.left
-		shadow.Top = bl.Mouse_Y - e.MouseOffsetY - absY - cur.top
+		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX - cur.Left()
+		shadow.Top = bl.Mouse_Y - e.MouseOffsetY - absY - cur.Top()
 
-		shadow.Pos__Node_Only(g_sudo)
+		//shadow.SetPos_on_Node_Only(g_sudo)
 
 		if cb != nil {
 			cb(newEvent(e.Target))

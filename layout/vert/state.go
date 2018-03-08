@@ -36,7 +36,7 @@ func (s *State) Top(top int) (*State){
 func (s *State) End() {
 	node := bl.Current_Node
 
-	bl.AddFunc( func() {
+	bl.AddStabilizeFunc_PreKids( func() {
 
 		runLogic(node, s)
 	});

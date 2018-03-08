@@ -28,7 +28,7 @@ func tick() {
             bl.Pos(100,100)
             bl.Dim(400,400)
 
-            border.Fill(0,50,0)
+            border.Fill(0,150,0)
 
             bl.Div()
             {
@@ -37,7 +37,7 @@ func tick() {
                 bl.Dim(100,100)
                 bl.SettleBoundary()
 
-                border.Fill(0,0,50)
+                border.Fill(0,0,150)
 
                 //drag.Use()
                 //side_resize_other.NodeId("green").left().End()
@@ -47,7 +47,7 @@ func tick() {
                 //side_resize_other.NodeId("green").Right().Bottom().End()
                 //side_resize_other.NodeId("green").Right().top().End()
                 //side_resize_other.NodeId("green").left().Bottom().End()
-                docker.Id().AnchorRight(10).End()
+               // docker.Id().AnchorRight(10).End()
                 side_resize.NodeId("green").Right().Top().End()
             }
             bl.End()
