@@ -1,4 +1,4 @@
-package sideglue
+package stretch_glue_left
 
 import "github.com/amortaza/go-bellina"
 
@@ -25,19 +25,17 @@ func (s *State) RightNodeId(nodeId string) (*State){
 
 func (state *State) End() {
 
-	bl.AddFunc(func(){
+	bl.AddStabilizeFunc_PreKids(func(){
 		leftNode := bl.GetNodeById(state.Z_Left_NodeId)
 		rightNode := bl.GetNodeById(state.Z_Right_NodeId)
 
-		a := rightNode.left - leftNode.left
-		b := leftNode.width
+		a := rightNode.Left() - leftNode.Left()
+		b := leftNode.Width()
 
 		delta := a - b
 
-		leftNode.width += delta
-
-		bl.Stabilize(leftNode)
-		bl.Stabilize(rightNode)
+		newWidth := leftNode.Width() + delta
+		leftNode.SetWidth(newWidth)
 	})
 }
 

@@ -19,6 +19,7 @@ func ensureState(nodeId string) *State {
 }
 
 func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
+
 	parentNode := node.Parent
 
 	left, top, width, height = node.Left(), node.Top(), node.Width(), node.Height()
@@ -28,6 +29,7 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 
 		// left AND right
 		if state.anchorFlags & _ANCHOR_LEFT != 0 {
+
 			left = state.leftPadding;
 			width = parentNode.Width() - state.leftPadding - state.rightPadding
 

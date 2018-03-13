@@ -18,7 +18,9 @@ func On(cb func(interface{})) {
 
 	shadow := bl.EnsureShadow()
 
-	shadow.SetPos_on_Node_Only("drag")
+	//shadow.SetPos_on_Node_Only("drag")
+	shadow.SetLeft_on_Node_Only("drag")
+	shadow.SetTop_on_Node_Only("drag")
 
 	mouse_drag.On( func(mouseDragEvent interface{}) {
 

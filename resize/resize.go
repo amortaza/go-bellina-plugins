@@ -35,7 +35,8 @@ func On(cb func(interface{})) {
 			width := int(math.Max(float64(g_startWidth + diffX), 16))
 			height := int(math.Max(float64(g_startHeight + diffY), 16))
 
-			shadow.Dim__Self_and_Node(width, height, "resize")
+			shadow.Width = width
+			shadow.Height = height
 
 			if cb != nil {
 				cb(newEvent(e.Target))
@@ -46,12 +47,12 @@ func On(cb func(interface{})) {
 		func(mouseDragEvent interface{}) {
 			e := mouseDragEvent.(mouse_drag.Event)
 
-			g_startWidth, g_startHeight = e.Target.width, e.Target.height
+			g_startWidth, g_startHeight = e.Target.Width(), e.Target.Height()
 		},
 
 		nil)
 
-	shadow.Dim__Node_Only("resize")
+	shadow.SetDim_on_Node_Only("resize")
 }
 
 func newEvent(target *bl.Node) Event {
