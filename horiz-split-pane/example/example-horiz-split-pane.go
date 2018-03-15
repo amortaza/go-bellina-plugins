@@ -30,10 +30,7 @@ func tick() {
 			bl.Div()
 			{
 				bl.Id("left")
-				bl.Pos(10, 10)
-				bl.Dim(100, 100)
-				bl.SettleBoundary()
-
+				bl.Width(100)
 				border.Wire(255, 0, 0)
 			}
 			bl.End()
@@ -41,9 +38,7 @@ func tick() {
 			bl.Div()
 			{
 				bl.Id("handle")
-				bl.Pos(100, 100)
-				bl.Dim(100, 100)
-
+				bl.Width(50)
 				border.Wire(0, 255, 0)
 			}
 			bl.End()
@@ -51,11 +46,7 @@ func tick() {
 			bl.Div()
 			{
 				bl.Id("right")
-				bl.Pos(300, 100)
-				bl.Dim(100, 100)
-				bl.SettleBoundary()
-
-				border.Wire(0, 0, 255)
+				border.Wire(255, 255, 255)
 			}
 			bl.End()
 

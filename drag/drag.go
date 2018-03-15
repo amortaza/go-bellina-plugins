@@ -18,7 +18,6 @@ func On(cb func(interface{})) {
 
 	shadow := bl.EnsureShadow()
 
-	//shadow.SetPos_on_Node_Only("drag")
 	shadow.SetLeft_on_Node_Only("drag")
 	shadow.SetTop_on_Node_Only("drag")
 
@@ -27,13 +26,38 @@ func On(cb func(interface{})) {
 		e := mouseDragEvent.(mouse_drag.Event)
 
 		absX, absY := bl.GetNodeAbsolutePos(e.Target.Parent)
-		shadow.Left = bl.Mouse_X - e.MouseOffsetX - absX
-		shadow.Top = bl.Mouse_Y - e.MouseOffsetY - absY
 
-		if cb != nil {
+		x := bl.Mouse_X - e.MouseOffsetX - absX
+		y := bl.Mouse_Y - e.MouseOffsetY - absY
+
+		state, ok := g_stateById[ e.Target.Id]
+
+		var pipeTo func(x, y int)
+
+		if ok {
+
+			pipeTo = state.pipeTo
+		}
+
+		if pipeTo != nil {
+			pipeTo(x, y)
+
+		} else {
+
+			shadow.Left = x
+			shadow.Top = y
+
+			if cb != nil {
 			cb(newEvent(e.Target))
+			}
 		}
 	})
 }
 
+func PipeTo(pipeTo func(x, y int)) {
+
+	state := ensureState(bl.Current_Node.Id)
+
+	state.pipeTo = pipeTo
+}
 

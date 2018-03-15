@@ -15,9 +15,11 @@ func init() {
 }
 
 type State struct {
+
 	anchorFlags uint32
 	sudo string
 	topPadding, leftPadding, rightPadding, bottomPadding int
+	pipeTo func(left, top, width, height int)
 }
 
 func Use() (*State) {
@@ -25,6 +27,15 @@ func Use() (*State) {
 	bl.RequireSettledBoundary()
 
 	return ensureState(bl.Current_Node.Id)
+}
+
+func (state *State) PipeTo( pipeTo func(left, top, width, height int) ) (*State) {
+
+	bl.RequireSettledBoundary()
+
+	state.pipeTo = pipeTo
+
+	return state
 }
 
 func (state *State) Sudo(sudo string) (*State) {
@@ -78,24 +89,30 @@ func (state *State) End() {
 
 		left, top, width, height := runLogic(node, state)
 
-		if state.anchorFlags & _ANCHOR_RIGHT != 0 || state.anchorFlags & _ANCHOR_LEFT != 0 {
-			node.SetOwnerOfLeft( state.sudo )
-			node.SetLeft(left)
-		}
+		if state.pipeTo == nil {
 
-		if state.anchorFlags & _ANCHOR_BOTTOM != 0 || state.anchorFlags & _ANCHOR_TOP != 0 {
-			node.SetOwnerOfTop(state.sudo)
-			node.SetTop(top)
-		}
+			if state.anchorFlags&_ANCHOR_RIGHT != 0 || state.anchorFlags&_ANCHOR_LEFT != 0 {
+				node.SetOwnerOfLeft(state.sudo)
+				node.SetLeft(left)
+			}
 
-		if state.anchorFlags & _ANCHOR_RIGHT != 0 && state.anchorFlags & _ANCHOR_LEFT != 0 {
-			node.SetOwnerOfWidth(state.sudo)
-			node.SetWidth(width)
-		}
+			if state.anchorFlags&_ANCHOR_BOTTOM != 0 || state.anchorFlags&_ANCHOR_TOP != 0 {
+				node.SetOwnerOfTop(state.sudo)
+				node.SetTop(top)
+			}
 
-		if state.anchorFlags & _ANCHOR_BOTTOM != 0 && state.anchorFlags & _ANCHOR_TOP != 0 {
-			node.SetOwnerOfHeight(state.sudo)
-			node.SetHeight(height)
+			if state.anchorFlags&_ANCHOR_RIGHT != 0 && state.anchorFlags&_ANCHOR_LEFT != 0 {
+				node.SetOwnerOfWidth(state.sudo)
+				node.SetWidth(width)
+			}
+
+			if state.anchorFlags&_ANCHOR_BOTTOM != 0 && state.anchorFlags&_ANCHOR_TOP != 0 {
+				node.SetOwnerOfHeight(state.sudo)
+				node.SetHeight(height)
+			}
+		} else {
+
+			state.pipeTo(left, top, width, height)
 		}
 	})
 }
