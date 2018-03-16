@@ -4,6 +4,7 @@ import (
 	"github.com/amortaza/go-bellina"
 	"github.com/amortaza/go-bellina-plugins/layout/docker"
 	"github.com/amortaza/go-bellina-plugins/drag"
+	"fmt"
 )
 
 func Use(leftId, handleId, rightId string) {
@@ -19,9 +20,9 @@ func Use(leftId, handleId, rightId string) {
 
 		docker.Use().AnchorLeft(10).AnchorTop(10).AnchorBottom(10).End()
 
-		shadow := bl.EnsureShadow()
+		s:=bl.EnsureShadow()
 
-		shadow.SetWidth_on_Node_Only("horiz")
+		fmt.Println(s.Left, ", ", s.Top, ", ", s.Width, ", ", s.Height)
 	}
 	bl.End()
 
@@ -35,12 +36,7 @@ func Use(leftId, handleId, rightId string) {
 
 		handleShadow = bl.EnsureShadow()
 		handleShadow.Top = 10
-
 		handleShadow.Height = parent.Height - 20
-
-		handleShadow.
-			SetLeft_on_Node_Only("horiz").
-			SetHeight_on_Node_Only("horiz")
 	}
 	bl.End()
 
@@ -55,12 +51,6 @@ func Use(leftId, handleId, rightId string) {
 		rightShadow.Left = handleShadow.Left + handleShadow.Width
 		delta := rightShadow.Left - oldLeft
 		rightShadow.Width -= delta
-
-		bl.EnsureShadow().
-			SetLeft_on_Node_Only("horiz").
-			SetTop_on_Node_Only("horiz").
-			SetHeight_on_Node_Only("horiz").
-			SetWidth_on_Node_Only("horiz")
 	}
 	bl.End()
 }

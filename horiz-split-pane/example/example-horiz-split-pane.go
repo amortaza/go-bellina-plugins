@@ -21,40 +21,40 @@ func tick() {
 		bl.Pos(0,0)
 		bl.Dim(1024, 768)
 
-		bl.Div()
-		{
-			bl.Id("yellow")
-			bl.Pos(10,10)
-			bl.Dim(1004, 748)
-
 			bl.Div()
 			{
-				bl.Id("left")
-				bl.Width(100)
-				border.Wire(255, 0, 0)
+				bl.Id("yellow")
+				bl.Pos(10, 10)
+				bl.Dim(1004, 748)
+
+				bl.Div()
+				{
+					bl.Id("left")
+					bl.Width(100)
+					border.Wire(255, 0, 0)
+				}
+				bl.End()
+
+				bl.Div()
+				{
+					bl.Id("handle")
+					bl.Width(50)
+					border.Wire(0, 255, 0)
+				}
+				bl.End()
+
+				bl.Div()
+				{
+					bl.Id("right")
+					border.Wire(255, 255, 255)
+				}
+				bl.End()
+
+				border.Wire(255, 255, 0)
+
+				horiz_split_pane.Use("left", "handle", "right")
 			}
 			bl.End()
-
-			bl.Div()
-			{
-				bl.Id("handle")
-				bl.Width(50)
-				border.Wire(0, 255, 0)
-			}
-			bl.End()
-
-			bl.Div()
-			{
-				bl.Id("right")
-				border.Wire(255, 255, 255)
-			}
-			bl.End()
-
-			border.Wire(255, 255, 0)
-
-			horiz_split_pane.Use("left", "handle", "right")
-		}
-		bl.End()
 
 		border.Wire(255, 255, 0)
 	}

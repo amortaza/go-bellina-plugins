@@ -17,7 +17,6 @@ func init() {
 type State struct {
 
 	anchorFlags uint32
-	sudo string
 	topPadding, leftPadding, rightPadding, bottomPadding int
 	pipeTo func(left, top, width, height int)
 }
@@ -34,13 +33,6 @@ func (state *State) PipeTo( pipeTo func(left, top, width, height int) ) (*State)
 	bl.RequireSettledBoundary()
 
 	state.pipeTo = pipeTo
-
-	return state
-}
-
-func (state *State) Sudo(sudo string) (*State) {
-
-	state.sudo = sudo
 
 	return state
 }
@@ -91,24 +83,22 @@ func (state *State) End() {
 
 		if state.pipeTo == nil {
 
+			shadow := bl.EnsureShadowById(node.Id)
+
 			if state.anchorFlags&_ANCHOR_RIGHT != 0 || state.anchorFlags&_ANCHOR_LEFT != 0 {
-				node.SetOwnerOfLeft(state.sudo)
-				node.SetLeft(left)
+				shadow.Left = left
 			}
 
 			if state.anchorFlags&_ANCHOR_BOTTOM != 0 || state.anchorFlags&_ANCHOR_TOP != 0 {
-				node.SetOwnerOfTop(state.sudo)
-				node.SetTop(top)
+				shadow.Top = top
 			}
 
 			if state.anchorFlags&_ANCHOR_RIGHT != 0 && state.anchorFlags&_ANCHOR_LEFT != 0 {
-				node.SetOwnerOfWidth(state.sudo)
-				node.SetWidth(width)
+				shadow.Width = width
 			}
 
 			if state.anchorFlags&_ANCHOR_BOTTOM != 0 && state.anchorFlags&_ANCHOR_TOP != 0 {
-				node.SetOwnerOfHeight(state.sudo)
-				node.SetHeight(height)
+				shadow.Height = height
 			}
 		} else {
 
