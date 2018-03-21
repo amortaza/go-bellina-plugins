@@ -3,7 +3,7 @@ package focus
 import (
 	"github.com/amortaza/go-bellina"
 	"github.com/amortaza/go-bellina-plugins/click"
-	"github.com/amortaza/go-xel2"
+	"github.com/amortaza/go-hal"
 )
 
 type Event struct {
@@ -59,7 +59,9 @@ func On_LifeCycle(onKey func(interface{}), onGainFocus func(interface{}), onLose
 }
 
 func onBlInit() {
-	bl.RegisterLongTerm(bl.eventType_Key, func(e bl.Event) {
+
+	bl.RegisterLongTerm(bl.EventType_Key, func(e bl.Event) {
+
 		if g_lastNodeId == "" {
 			return
 		}
@@ -78,7 +80,7 @@ func onBlInit() {
 
 		e := mbe.(*bl.MouseButtonEvent)
 
-		if e.ButtonAction == xel.Button_Action_Down {
+		if e.ButtonAction == hal.Button_Action_Down {
 			return
 		}
 

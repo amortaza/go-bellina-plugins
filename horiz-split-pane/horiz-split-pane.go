@@ -4,7 +4,6 @@ import (
 	"github.com/amortaza/go-bellina"
 	"github.com/amortaza/go-bellina-plugins/layout/docker"
 	"github.com/amortaza/go-bellina-plugins/drag"
-	"fmt"
 )
 
 func Use(leftId, handleId, rightId string) {
@@ -19,10 +18,6 @@ func Use(leftId, handleId, rightId string) {
 		bl.SettleBoundary()
 
 		docker.Use().AnchorLeft(10).AnchorTop(10).AnchorBottom(10).End()
-
-		s:=bl.EnsureShadow()
-
-		fmt.Println(s.Left, ", ", s.Top, ", ", s.Width, ", ", s.Height)
 	}
 	bl.End()
 

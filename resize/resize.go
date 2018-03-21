@@ -51,8 +51,6 @@ func On(cb func(interface{})) {
 		},
 
 		nil)
-
-	shadow.SetDim_on_Node_Only("resize")
 }
 
 func newEvent(target *bl.Node) Event {
