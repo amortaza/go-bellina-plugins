@@ -15,7 +15,7 @@ func Use(leftId, handleId, rightId string) {
 
 	bl.DivId(leftId)
 	{
-		bl.SettleBoundary()
+		//bl.SettleBoundary()
 
 		docker.Use().AnchorLeft(10).AnchorTop(10).AnchorBottom(10).End()
 	}
@@ -37,7 +37,7 @@ func Use(leftId, handleId, rightId string) {
 
 	bl.DivId(rightId)
 	{
-		bl.SettleBoundary()
+		//bl.SettleBoundary()
 
 		docker.Use().AnchorRight(10).AnchorTop(10).AnchorBottom(10).PipeTo(docker_pipe).End()
 

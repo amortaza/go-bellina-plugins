@@ -18,11 +18,11 @@ func ensureState(nodeId string) *State {
 	return state
 }
 
-func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
+func runLogic(shadow *bl.ShadowNode, state *State) (left, top, width, height int) {
 
-	parentNode := node.Parent
+	parentShadow := bl.EnsureShadowById(shadow.BackingNode.Parent.Id)
 
-	left, top, width, height = node.Left(), node.Top(), node.Width(), node.Height()
+	left, top, width, height = shadow.Left, shadow.Top, shadow.Width, shadow.Height
 
 	// right
 	if state.anchorFlags & _ANCHOR_RIGHT != 0 {
@@ -31,7 +31,7 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 		if state.anchorFlags & _ANCHOR_LEFT != 0 {
 
 			left = state.leftPadding;
-			width = parentNode.Width() - state.leftPadding - state.rightPadding
+			width = parentShadow.Width - state.leftPadding - state.rightPadding
 
 			if width < 16 {
 				width = 16
@@ -39,7 +39,7 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 
 		} else {
 			// right only
-			left = parentNode.Width() - node.Width() - state.rightPadding
+			left = parentShadow.Width - shadow.Width - state.rightPadding
 		}
 	} else if state.anchorFlags & _ANCHOR_LEFT != 0 {
 		// left only
@@ -52,11 +52,11 @@ func runLogic(node *bl.Node, state *State) (left, top, width, height int) {
 		// bottom AND top
 		if state.anchorFlags & _ANCHOR_TOP != 0 {
 			top = state.topPadding;
-			height = parentNode.Height() - state.topPadding - state.bottomPadding
+			height = parentShadow.Height - state.topPadding - state.bottomPadding
 
 		} else {
 			// bottom only
-			top = parentNode.Height() - node.Height() - state.bottomPadding
+			top = parentShadow.Height - shadow.Height - state.bottomPadding
 		}
 	} else if state.anchorFlags & _ANCHOR_TOP != 0 {
 		// top only

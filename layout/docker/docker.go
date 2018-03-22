@@ -23,14 +23,10 @@ type State struct {
 
 func Use() (*State) {
 
-	bl.RequireSettledBoundary()
-
 	return ensureState(bl.Current_Node.Id)
 }
 
 func (state *State) PipeTo( pipeTo func(left, top, width, height int) ) (*State) {
-
-	bl.RequireSettledBoundary()
 
 	state.pipeTo = pipeTo
 
@@ -79,11 +75,11 @@ func (state *State) End() {
 
 	bl.AddStabilizeFunc_PreKids(func() {
 
-		left, top, width, height := runLogic(node, state)
+		shadow := bl.EnsureShadowById(node.Id)
+
+		left, top, width, height := runLogic(shadow, state)
 
 		if state.pipeTo == nil {
-
-			shadow := bl.EnsureShadowById(node.Id)
 
 			if state.anchorFlags&_ANCHOR_RIGHT != 0 || state.anchorFlags&_ANCHOR_LEFT != 0 {
 				shadow.Left = left
@@ -100,6 +96,7 @@ func (state *State) End() {
 			if state.anchorFlags&_ANCHOR_BOTTOM != 0 && state.anchorFlags&_ANCHOR_TOP != 0 {
 				shadow.Height = height
 			}
+
 		} else {
 
 			state.pipeTo(left, top, width, height)
