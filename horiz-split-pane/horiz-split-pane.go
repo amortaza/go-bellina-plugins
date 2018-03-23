@@ -6,16 +6,30 @@ import (
 	"github.com/amortaza/go-bellina-plugins/drag"
 )
 
+var g_curState *State
+
 func Use(leftId, handleId, rightId string) {
+
+	var wasNew bool
+
+	g_curState, wasNew = ensureState()
+
+	if wasNew {
+		g_curState.leftId, g_curState.handleId, g_curState.rightId = leftId, handleId, rightId
+	}
+
+	state := g_curState
 
 	var handleShadow *bl.ShadowNode
 
 	parentId := bl.Current_Node.Id
-	parent := bl.EnsureShadowById(parentId)
+	parentShadow := bl.EnsureShadowById(parentId)
+
+	sourceLeftWidth := 0
 
 	bl.DivId(leftId)
 	{
-		//bl.SettleBoundary()
+		sourceLeftWidth = bl.Current_Node.Width()
 
 		docker.Use().AnchorLeft(10).AnchorTop(10).AnchorBottom(10).End()
 	}
@@ -23,23 +37,28 @@ func Use(leftId, handleId, rightId string) {
 
 	bl.DivId(handleId)
 	{
-		bl.Left(110)
-		bl.Top(10)
+		bl.Left(sourceLeftWidth+10)
+
+		drag_pipe2 := func(x, y int) {
+			drag_pipe(x, y, state)
+		}
 
 		drag.Use()
-		drag.PipeTo(drag_pipe)
+		drag.PipeTo(drag_pipe2)
 
 		handleShadow = bl.EnsureShadow()
 		handleShadow.Top = 10
-		handleShadow.Height = parent.Height - 20
+		handleShadow.Height = parentShadow.Height - 20
 	}
 	bl.End()
 
 	bl.DivId(rightId)
 	{
-		//bl.SettleBoundary()
+		docker_pipe2 := func(x, y, w, h int) {
+			docker_pipe(x, y, w, h, state)
+		}
 
-		docker.Use().AnchorRight(10).AnchorTop(10).AnchorBottom(10).PipeTo(docker_pipe).End()
+		docker.Use().AnchorRight(10).AnchorTop(10).AnchorBottom(10).PipeTo(docker_pipe2).End()
 
 		rightShadow := bl.EnsureShadow()
 		oldLeft := rightShadow.Left
@@ -50,26 +69,25 @@ func Use(leftId, handleId, rightId string) {
 	bl.End()
 }
 
-func drag_pipe(x, y int) {
+func drag_pipe(x, y int, state *State) {
 
-	left := bl.EnsureShadowById("left")
-	left.Width = x - 10
+	leftShadow := bl.EnsureShadowById(state.leftId)
+	leftShadow.Width = x - 10
 
-	handle := bl.EnsureShadowById("handle")
-	handle.Left = x
+	handleShadow := bl.EnsureShadowById(state.handleId)
+	handleShadow.Left = x
 }
 
-func docker_pipe(x, y, w, h int) {
+func docker_pipe(x, y, w, h int, state *State) {
 
-	right := bl.EnsureShadowById("right")
-	right.Top = 10
+	rightShadow := bl.EnsureShadowById(state.rightId)
+	rightShadow.Top = 10
 
-	parentId := right.BackingNode.Parent.Id
-	parent := bl.EnsureShadowById(parentId)
-	right.Height = parent.Height - 20
+	parentId := rightShadow.BackingNode.Parent.Id
+	parentShadow := bl.EnsureShadowById(parentId)
+	rightShadow.Height = parentShadow.Height - 20
 
-
-	handle := bl.EnsureShadowById("handle")
-	hright := handle.Left + handle.Width
-	right.Width = parent.Width - hright - 10
+	handleShadow := bl.EnsureShadowById(state.handleId)
+	hright := handleShadow.Left + handleShadow.Width
+	rightShadow.Width = parentShadow.Width - hright - 10
 }

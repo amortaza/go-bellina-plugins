@@ -37,7 +37,7 @@ func tick() {
 				bl.Div()
 				{
 					bl.Id("handle")
-					bl.Height(50)
+					bl.Height(30)
 					border.Wire(0, 0, 0)
 				}
 				bl.End()

@@ -30,7 +30,6 @@ func tick() {
 				{
 					bl.Id("left")
 					bl.Width(100)
-					//border.Fill(0, 0, 50)
 					border.Wire(0, 0, 255)
 				}
 				bl.End()
@@ -39,7 +38,6 @@ func tick() {
 				{
 					bl.Id("handle")
 					bl.Width(50)
-					//border.Fill(0, 0, 0)
 					border.Wire(0, 0, 0)
 				}
 				bl.End()
@@ -47,19 +45,16 @@ func tick() {
 				bl.Div()
 				{
 					bl.Id("right")
-					//border.Fill(0, 50, 0)
 					border.Wire(0, 255, 0)
 				}
 				bl.End()
 
-				//border.Fill(60, 60, 0)
 				border.Wire(255, 255, 0)
 
 				horiz_split_pane.Use("left", "handle", "right")
 			}
 			bl.End()
 
-		//border.Fill(55, 0, 0)
 		border.Wire(255, 0, 0)
 	}
 	bl.End()

@@ -25,16 +25,19 @@ func Use(topId, handleId, bottomId string) {
 	parentId := bl.Current_Node.Id
 	parentShadow := bl.EnsureShadowById(parentId)
 
+	sourceTopHeight := 0
+
 	bl.DivId(topId)
 	{
+		sourceTopHeight = bl.Current_Node.Height()
+
 		docker.Use().AnchorLeft(10).AnchorTop(10).AnchorRight(10).End()
 	}
 	bl.End()
 
 	bl.DivId(handleId)
 	{
-		bl.Left(20)
-		bl.Top(20)
+		bl.Top(sourceTopHeight+10)
 
 		drag_pipe2 := func(x, y int) {
 			drag_pipe(x, y, state)
@@ -77,14 +80,14 @@ func drag_pipe(x, y int, state *State) {
 
 func docker_pipe(x, y, w, h int, state *State) {
 
-	bottom := bl.EnsureShadowById(state.bottomId)
-	bottom.Left = 10
+	bottomShadow := bl.EnsureShadowById(state.bottomId)
+	bottomShadow.Left = 10
 
-	parentId := bottom.BackingNode.Parent.Id
-	parent := bl.EnsureShadowById(parentId)
-	bottom.Width = parent.Width - 20
+	parentId := bottomShadow.BackingNode.Parent.Id
+	parentShadow := bl.EnsureShadowById(parentId)
+	bottomShadow.Width = parentShadow.Width - 20
 
-	handle := bl.EnsureShadowById(state.handleId)
-	hbottom := handle.Top + handle.Height
-	bottom.Height = parent.Height - hbottom - 10
+	handleShadow := bl.EnsureShadowById(state.handleId)
+	hbottom := handleShadow.Top + handleShadow.Height
+	bottomShadow.Height = parentShadow.Height - hbottom - 10
 }
