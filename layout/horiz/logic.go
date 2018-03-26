@@ -4,16 +4,16 @@ import "github.com/amortaza/go-bellina"
 
 func runLogic(node *bl.Node, state *State) {
 
-	spacing := state.Z_Spacing
+	spacing := state.spacing
 
-	var left = state.Z_Left
+	var left = state.left
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
 
 		kid := e.Value.(*bl.Node)
 
-		kid.left = left
+		kid.SetLeft(left)
 
-		left += kid.width + spacing
+		left += kid.Width() + spacing
 	}
 }

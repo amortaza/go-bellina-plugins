@@ -4,16 +4,17 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-// Shared variable across Div()/End()
-var g_curState *State
+var g_state *State
 
 func init() {
+
 	g_stateById = make(map[string] *State)
 }
 
-func Id() *State {
-	g_curState = ensureState(bl.Current_Node.Id)
+func Use() *State {
 
-	return g_curState
+	g_state = ensureState(bl.Current_Node.Id)
+
+	return g_state
 }
 

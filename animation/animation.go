@@ -6,10 +6,16 @@ import (
 )
 
 func init() {
+
 	bl.Register_LifeCycle_After_UserTick_LongTerm(tick)
 }
 
-func StartPath(nodeId string, animId string, startValue, endValue float32, numSteps int, cb func(shadow *bl.ShadowNode, value float32)) {
+func StartPath(	nodeId string,
+				animId string,
+				startValue, endValue float32,
+				numSteps int,
+				cb func(shadow *bl.ShadowNode, value float32)) {
+
 	state := &AnimState{NodeId: nodeId, AnimId: animId, shadow: bl.EnsureShadowById(nodeId)}
 
 	g_states.PushBack(state)
@@ -45,10 +51,12 @@ func StartPath(nodeId string, animId string, startValue, endValue float32, numSt
 }
 
 func tick() {
+
 	var elements list.List
 
 	for e := g_states.Front(); e != nil; e = e.Next() {
-	        state := e.Value.(*AnimState)
+
+	    state := e.Value.(*AnimState)
 
 		value, valid := state.interpolFunc()
 
@@ -61,7 +69,9 @@ func tick() {
 	}
 
 	if elements.Len() > 0 {
+
 		for e := elements.Front(); e != nil; e = e.Next() {
+
 		        el := e.Value.(*list.Element)
 
 			g_states.Remove(el)

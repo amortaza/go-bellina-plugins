@@ -3,13 +3,15 @@ package horiz
 import "github.com/amortaza/go-bellina"
 
 type State struct {
-	Z_Left    int
-	Z_Spacing int
+
+	left    int
+	spacing int
 }
 
 var g_stateById  map[string] *State
 
 func ensureState(nodeId string) *State {
+
 	state, ok := g_stateById[nodeId]
 
 	if !ok {
@@ -22,21 +24,25 @@ func ensureState(nodeId string) *State {
 }
 
 func (s *State) Spacing(spacing int) (*State){
-	s.Z_Spacing = spacing
+
+	s.spacing = spacing
 
 	return s
 }
 
 func (s *State) Left(left int) (*State){
-	s.Z_Left = left
+
+	s.left = left
 
 	return s
 }
 
 func (s *State) End() {
+
 	node := bl.Current_Node
 
-	bl.AddFunc(func() {
+	bl.AddStabilizeFunc_PreKids(func() {
+
 		runLogic(node, s)
 	})
 }
