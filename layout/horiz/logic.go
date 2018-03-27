@@ -6,14 +6,16 @@ func runLogic(node *bl.Node, state *State) {
 
 	spacing := state.spacing
 
-	var left = state.left
+	var x = state.left
 
 	for e := node.Kids.Front(); e != nil; e = e.Next() {
 
 		kid := e.Value.(*bl.Node)
 
-		kid.SetLeft(left)
+		kidShadow := bl.EnsureShadowByNode(kid)
 
-		left += kid.Width() + spacing
+		kidShadow.Left = x
+
+		x += kidShadow.Width + spacing
 	}
 }

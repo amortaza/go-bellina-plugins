@@ -4,25 +4,29 @@ import (
 	"github.com/amortaza/go-bellina"
 )
 
-//var g_stateByNodeId map[string] *State
+var g_stateByNodeId map[string] *State
 
-//func ensureState(nodeId string) *State {
-//
-//	state, ok := g_stateByNodeId[nodeId]
-//
-//	if !ok {
-//
-//		state = &State{}
-//
-//		g_stateByNodeId[nodeId] = state
-//	}
-//
-//	return state
-//}
+func ensureState(nodeId string) *State {
 
-func runLogic(shadow *bl.ShadowNode) (width, height int) {
+	state, ok := g_stateByNodeId[nodeId]
+
+	if !ok {
+
+		state = &State{}
+
+		g_stateByNodeId[nodeId] = state
+	}
+
+	return state
+}
+
+func runLogic(shadow *bl.ShadowNode, state *State) (width, height int) {
 
 	kids := shadow.BackingNode.Kids
+
+	if state.vertOnly {
+		width = shadow.Width
+	}
 
 	for kid := kids.Front(); kid != nil; kid = kid.Next() {
 
@@ -33,8 +37,11 @@ func runLogic(shadow *bl.ShadowNode) (width, height int) {
 		right := kidShadow.Left + kidShadow.Width
 		top := kidShadow.Top + kidShadow.Height
 
-		if right > width {
-			width = right
+		if !state.vertOnly {
+
+			if right > width {
+				width = right
+			}
 		}
 
 		if top > height {

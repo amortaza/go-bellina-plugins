@@ -12,8 +12,10 @@ func runLogic(node *bl.Node, state *State) {
 
 		kid := e.Value.(*bl.Node)
 
-		kid.SetTop(y)
+		kidShadow := bl.EnsureShadowByNode(kid)
 
-		y += kid.Height() + spacing
+		kidShadow.Top = y
+
+		y += kidShadow.Height + spacing
 	}
 }
