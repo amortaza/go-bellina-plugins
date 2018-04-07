@@ -1,6 +1,8 @@
 package horiz_split_pane
 
-import "github.com/amortaza/go-bellina"
+import (
+	"github.com/amortaza/go-bellina"
+)
 
 type State struct {
 
