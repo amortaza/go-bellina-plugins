@@ -51,6 +51,14 @@ func (state *State) AnchorTop(padding int) (*State) {
 	return state
 }
 
+func (state *State) AnchorHoriz(paddingLeft, paddingRight int) (*State) {
+
+	state.AnchorLeft(paddingLeft)
+	state.AnchorRight(paddingRight)
+
+	return state
+}
+
 func (state *State) AnchorRight(padding int) (*State) {
 
 	state.anchorFlags |= _ANCHOR_RIGHT

@@ -30,7 +30,7 @@ func Use() (state *State){
 	return state
 }
 
-func (state *State) Vert() (*State) {
+func (state *State) VertOnly() (*State) {
 
 	state.vertOnly = true
 
