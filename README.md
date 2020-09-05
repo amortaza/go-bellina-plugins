@@ -1,6 +1,6 @@
 # Bellina Common Plugins
 
-Plugins for common behaviors are provided for convenience.
+Plugins for common behaviors is provided for convenience.
 
 Each package describes usages with example code.
 
