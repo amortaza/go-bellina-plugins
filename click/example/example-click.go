@@ -1,13 +1,13 @@
 package main
 
 import (
-	"runtime"
 	"fmt"
 	"github.com/amortaza/go-bellina"
+	"github.com/amortaza/go-bellina-plugins/click"
 	"github.com/amortaza/go-dark-ux"
 	"github.com/amortaza/go-dark-ux/border"
-	"github.com/amortaza/go-bellina-plugins/click"
-	"github.com/amortaza/go-hal-g5"
+	"github.com/amortaza/go-hal-oob"
+	"runtime"
 )
 
 func initialize() {
@@ -15,7 +15,6 @@ func initialize() {
 }
 
 func tick() {
-
 	bl.Root()
 	{
 		bl.Pos(0,0)
@@ -84,7 +83,7 @@ func init() {
 }
 
 func main() {
-	bl.Start( hal_g5.New(), 1280, 1024, "Bellina v0.9", initialize, tick, uninit )
+	bl.Start( haloob.NewHal(), "i3wmfloater",1200, 100,1280, 1024, initialize, tick, uninit )
 
 	fmt.Println("bye!")
 }

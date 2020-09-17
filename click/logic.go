@@ -9,11 +9,9 @@ import (
 var gLastNodeId string
 
 func logic(cb, onDown, onUpAndMiss func(interface{})) {
-
 	nodeId := bl.Current_Node.Id
 
 	bl.RegisterShortTerm(bl.EventType_Mouse_Button, func(event bl.Event) {
-
 		e := event.(*bl.MouseButtonEvent)
 
 		if e.ButtonAction == hal.Button_Action_Down {
